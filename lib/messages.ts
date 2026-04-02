@@ -72,7 +72,7 @@ const EN_MESSAGES: Messages = {
     remove: "Remove",
     setGoalNameAndDurationFirst: "Set a goal name and duration first",
     completedSuffix: "completed",
-    selectDuration: "Select duration",
+    selectDuration: "Select",
     durationPerSession: "Duration per session",
   },
   dayLabels: {
@@ -125,7 +125,7 @@ const ES_MESSAGES: Messages = {
     remove: "Eliminar",
     setGoalNameAndDurationFirst: "Primero define nombre de meta y duración",
     completedSuffix: "completado",
-    selectDuration: "Elegir duración",
+    selectDuration: "Elegir",
     durationPerSession: "Duración por sesión",
   },
   dayLabels: {

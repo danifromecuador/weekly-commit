@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 
@@ -117,7 +118,10 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
         aria-label={m.grid.durationPerSession}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="block truncate text-left">{selectedLabel}</span>
+        <span className="flex items-center justify-between gap-2">
+          <span className="block truncate text-left">{selectedLabel}</span>
+          <ChevronDown className="size-3.5 shrink-0 opacity-80" strokeWidth={2.25} aria-hidden />
+        </span>
       </button>
       {menu ? createPortal(menu, document.body) : null}
     </div>
