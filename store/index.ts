@@ -11,6 +11,7 @@ import {
   createActivitiesSlice,
   persistedActivitiesOnly,
 } from "./slices/activities-slice";
+import { createLocaleSlice } from "./slices/locale-slice";
 import { createThemeSlice } from "./slices/theme-slice";
 import { mergeWeeklyCommitPersistedState } from "./merge-persisted-state";
 import { noopStorage } from "./storage";
@@ -22,6 +23,7 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
   persist(
     (...args) => ({
       ...createThemeSlice(...args),
+      ...createLocaleSlice(...args),
       ...createActivitiesSlice(...args),
     }),
     {
@@ -33,6 +35,7 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
         activities: persistedActivitiesOnly(s.activities),
         themeId: s.themeId,
         appearance: s.appearance,
+        locale: s.locale,
       }),
       merge: mergeWeeklyCommitPersistedState,
       onRehydrateStorage: () => (state, error) => {

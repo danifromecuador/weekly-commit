@@ -9,11 +9,13 @@ import { useWeeklyGrid } from "./use-weekly-grid";
 vi.mock("@/store", async () => {
   const { create } = await import("zustand");
   const { createThemeSlice } = await import("@/store/slices/theme-slice");
+  const { createLocaleSlice } = await import("@/store/slices/locale-slice");
   const { createActivitiesSlice } = await import(
     "@/store/slices/activities-slice",
   );
   const useWeeklyGridStore = create<WeeklyCommitState>()((...args) => ({
     ...createThemeSlice(...args),
+    ...createLocaleSlice(...args),
     ...createActivitiesSlice(...args),
   }));
   return { useWeeklyGridStore };

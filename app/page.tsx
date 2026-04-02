@@ -1,4 +1,5 @@
 import { AppearanceToggle } from "@/components/appearance-toggle";
+import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
 import { WeeklyGrid } from "@/components/WeeklyGrid";
 
@@ -14,6 +15,7 @@ export default function Page() {
         </div>
         <div className="order-1 flex flex-wrap items-center justify-center gap-2 sm:order-2 sm:justify-end sm:pt-1">
           <AppearanceToggle />
+          <LanguageToggle />
           <ThemeSelector />
         </div>
       </header>

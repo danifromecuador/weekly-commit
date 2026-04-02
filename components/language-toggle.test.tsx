@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { WeeklyCommitState } from "@/store/types";
 import { useWeeklyGridStore } from "@/store";
 
-import { AppearanceToggle } from "./appearance-toggle";
+import { LanguageToggle } from "./language-toggle";
 
 vi.mock("@/store", async () => {
   const { create } = await import("zustand");
@@ -22,25 +22,25 @@ vi.mock("@/store", async () => {
   return { useWeeklyGridStore };
 });
 
-describe("AppearanceToggle", () => {
+describe("LanguageToggle", () => {
   beforeEach(() => {
-    useWeeklyGridStore.setState({
-      appearance: "light",
-    });
+    useWeeklyGridStore.setState({ locale: "en" });
   });
 
-  it("toggles dark/light on click and updates aria-label", async () => {
+  it("toggles en/es on click", async () => {
     const user = userEvent.setup();
-    render(<AppearanceToggle />);
-    const btn = screen.getByRole("button", { name: /Switch to dark mode/i });
+    render(<LanguageToggle />);
+
+    const btn = screen.getByRole("button", {
+      name: /Switch language to Spanish/i,
+    });
     await user.click(btn);
-    expect(useWeeklyGridStore.getState().appearance).toBe("dark");
-    expect(
-      screen.getByRole("button", { name: /Switch to light mode/i }),
-    ).toBeInTheDocument();
+    expect(useWeeklyGridStore.getState().locale).toBe("es");
+
     await user.click(
-      screen.getByRole("button", { name: /Switch to light mode/i }),
+      screen.getByRole("button", { name: /Switch language to English/i }),
     );
-    expect(useWeeklyGridStore.getState().appearance).toBe("light");
+    expect(useWeeklyGridStore.getState().locale).toBe("en");
   });
 });
+

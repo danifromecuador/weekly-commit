@@ -9,6 +9,7 @@ import {
 } from "@/lib/themes";
 
 import { createActivitiesSlice } from "./activities-slice";
+import { createLocaleSlice } from "./locale-slice";
 import { createThemeSlice } from "./theme-slice";
 import type { WeeklyCommitState } from "../types";
 
@@ -19,6 +20,7 @@ vi.mock("@/lib/theme-fonts", () => ({
 function createFullStore() {
   return create<WeeklyCommitState>()((...args) => ({
     ...createThemeSlice(...args),
+    ...createLocaleSlice(...args),
     ...createActivitiesSlice(...args),
   }));
 }

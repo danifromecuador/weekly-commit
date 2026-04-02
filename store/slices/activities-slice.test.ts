@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { createLocaleSlice } from "@/store/slices/locale-slice";
 import { createThemeSlice } from "@/store/slices/theme-slice";
 import type { WeeklyCommitState } from "@/store/types";
 
@@ -13,6 +14,7 @@ import {
 function createTestStore() {
   return create<WeeklyCommitState>()((...args) => ({
     ...createThemeSlice(...args),
+    ...createLocaleSlice(...args),
     ...createActivitiesSlice(...args),
   }));
 }

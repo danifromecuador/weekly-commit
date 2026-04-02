@@ -5,6 +5,7 @@ import {
   DEFAULT_APPEARANCE,
   DEFAULT_THEME_ID,
 } from "@/lib/themes";
+import { DEFAULT_LOCALE } from "@/lib/i18n";
 import type { ActivityRow } from "@/lib/weekly-grid/types";
 
 import { mergeWeeklyCommitPersistedState } from "./merge-persisted-state";
@@ -14,6 +15,7 @@ function noopActions(): Pick<
   WeeklyCommitState,
   | "setTheme"
   | "setAppearance"
+  | "setLocale"
   | "addActivity"
   | "removeActivity"
   | "setActivityName"
@@ -23,6 +25,7 @@ function noopActions(): Pick<
   return {
     setTheme: () => {},
     setAppearance: () => {},
+    setLocale: () => {},
     addActivity: () => null,
     removeActivity: () => {},
     setActivityName: () => {},
@@ -35,6 +38,7 @@ function baseCurrent(over: Partial<WeeklyCommitState> = {}): WeeklyCommitState {
   return {
     themeId: DEFAULT_THEME_ID,
     appearance: DEFAULT_APPEARANCE,
+    locale: DEFAULT_LOCALE,
     activities: [],
     ...noopActions(),
     ...over,
@@ -77,6 +81,18 @@ describe("mergeWeeklyCommitPersistedState", () => {
     );
     expect(merged.themeId).toBe("graphite");
     expect(merged.appearance).toBe("dark");
+  });
+
+  it("parses locale from persisted object", () => {
+    const current = baseCurrent();
+    const merged = mergeWeeklyCommitPersistedState({ locale: "es" }, current);
+    expect(merged.locale).toBe("es");
+  });
+
+  it("falls back locale when persisted is invalid", () => {
+    const current = baseCurrent({ locale: "es" });
+    const merged = mergeWeeklyCommitPersistedState({ locale: "pt" }, current);
+    expect(merged.locale).toBe(DEFAULT_LOCALE);
   });
 
   it("falls back theme when invalid", () => {

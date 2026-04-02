@@ -1,4 +1,5 @@
 import type { ActivityRow } from "@/lib/weekly-grid/types";
+import { parseLocale, type Locale } from "@/lib/i18n";
 import {
   parseAppearance,
   parseStoredTheme,
@@ -22,11 +23,13 @@ export function mergeWeeklyCommitPersistedState(
     activities?: ActivityRow[];
     themeId?: ThemeId;
     appearance?: AppearanceMode;
+    locale?: Locale;
   };
   if (p.themeId != null) {
     next.themeId = parseStoredTheme(String(p.themeId));
   }
   next.appearance = parseAppearance(p.appearance);
+  next.locale = parseLocale(p.locale);
   if (Array.isArray(p.activities)) {
     next.activities = persistedActivitiesOnly(p.activities);
   }
