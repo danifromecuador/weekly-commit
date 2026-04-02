@@ -4,7 +4,7 @@ import { Palette } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { THEME_OPTIONS, type ThemeId } from "@/lib/themes";
-import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
+import { useWeeklyGridStore } from "@/store";
 
 export function ThemeSelector() {
   const [open, setOpen] = useState(false);

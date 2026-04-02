@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 
-import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
+import { useWeeklyGridStore } from "@/store";
 
 export function AppearanceToggle() {
   const appearance = useWeeklyGridStore((s) => s.appearance);

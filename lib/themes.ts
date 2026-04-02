@@ -21,7 +21,7 @@ export const DEFAULT_APPEARANCE: AppearanceMode = "light";
 /** Legacy key; still read for migration into the Zustand persist blob. */
 export const THEME_STORAGE_KEY = "weekly-commit-theme";
 
-/** Zustand `persist({ name })` — keep in sync with `lib/weekly-grid/store.ts`. */
+/** Zustand `persist({ name })` — keep in sync with `store/index.ts`. */
 export const WEEKLY_COMMIT_PERSIST_KEY = "weekly-commit";
 
 export const THEME_OPTIONS: { id: ThemeId; label: string }[] = [

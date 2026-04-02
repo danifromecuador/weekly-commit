@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { DAY_IDS } from "@/lib/weekly-grid/constants";
-import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
+import { useWeeklyGridStore } from "@/store";
 import {
   columnTotals,
   grandTotal,

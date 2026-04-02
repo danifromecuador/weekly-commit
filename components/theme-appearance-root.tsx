@@ -7,7 +7,7 @@ import {
   applyThemeAndAppearanceToDocument,
   readPersistedThemeAppearanceFromLocalStorage,
 } from "@/lib/themes";
-import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
+import { useWeeklyGridStore } from "@/store";
 
 /**
  * Keeps `data-theme` / `data-appearance` on <html> in sync with persist + store
