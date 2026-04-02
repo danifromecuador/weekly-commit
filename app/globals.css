@@ -263,6 +263,51 @@ html[data-theme="botanical-flow"] body {
   .wc-muted-ink {
     color: color-mix(in srgb, var(--theme-ink) 48%, transparent);
   }
+
+  /* Theme picker menu (replaces native <select> so OS colors never leak) */
+  .wc-theme-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 12.5rem;
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    font: inherit;
+    color: var(--theme-ink);
+    background: var(--theme-page);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--wc-radius-ui);
+  }
+
+  .wc-theme-option {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: min(8px, var(--wc-radius-ui));
+    background: transparent;
+    color: var(--theme-ink);
+    padding: 0.45rem 0.55rem;
+    font: inherit;
+    font-size: 0.875rem;
+    text-align: left;
+    transition: background-color 0.12s ease;
+  }
+
+  .wc-theme-option:hover {
+    background: var(--theme-hover);
+  }
+
+  .wc-theme-option:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+  }
+
+  .wc-theme-option[aria-selected="true"] {
+    background: var(--theme-panel);
+    font-weight: 600;
+  }
 }
 
 html[data-theme="botanical-flow"] .wc-title-script {

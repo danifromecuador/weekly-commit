@@ -7,9 +7,9 @@ import {
   DEFAULT_THEME_ID,
   THEME_OPTIONS,
   applyTheme,
-  parseStoredTheme,
   readStoredTheme,
   subscribeTheme,
+  type ThemeId,
 } from "@/lib/themes";
 
 export function ThemeSelector() {
@@ -44,6 +44,11 @@ export function ThemeSelector() {
     };
   }, [open]);
 
+  const pick = (id: ThemeId) => {
+    applyTheme(id);
+    setOpen(false);
+  };
+
   return (
     <div
       ref={wrapRef}
@@ -60,32 +65,28 @@ export function ThemeSelector() {
         Theme
       </button>
       {open ? (
-        <div
+        <ul
           id="theme-picker"
-          className="absolute end-0 top-full z-20 mt-2 min-w-[12.5rem] p-1 shadow-none"
-          style={{
-            background: "var(--theme-page)",
-            borderRadius: "var(--wc-radius-ui)",
-          }}
+          role="listbox"
+          aria-label="Choose color theme"
+          aria-activedescendant={`theme-option-${theme}`}
+          className="wc-theme-menu absolute end-0 top-full z-20 mt-2"
         >
-          <select
-            suppressHydrationWarning
-            className="wc-select w-full cursor-pointer py-1.5 text-left text-sm normal-case tracking-normal"
-            value={theme}
-            onChange={(e) => {
-              const next = parseStoredTheme(e.target.value);
-              applyTheme(next);
-              setOpen(false);
-            }}
-            aria-label="Choose color theme"
-          >
-            {THEME_OPTIONS.map((t) => (
-              <option key={t.id} value={t.id}>
+          {THEME_OPTIONS.map((t) => (
+            <li key={t.id} role="presentation">
+              <button
+                type="button"
+                role="option"
+                id={`theme-option-${t.id}`}
+                aria-selected={theme === t.id}
+                className="wc-theme-option"
+                onClick={() => pick(t.id)}
+              >
                 {t.label}
-              </option>
-            ))}
-          </select>
-        </div>
+              </button>
+            </li>
+          ))}
+        </ul>
       ) : null}
     </div>
   );
