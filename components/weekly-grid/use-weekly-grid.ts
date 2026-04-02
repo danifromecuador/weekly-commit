@@ -13,7 +13,11 @@ export function useWeeklyGrid() {
   );
 
   const activities = useWeeklyGridStore((s) => s.activities);
-  const addActivity = useWeeklyGridStore((s) => s.addActivity);
+  const addActivityFromStore = useWeeklyGridStore((s) => s.addActivity);
+  const addActivity = () => {
+    const newId = addActivityFromStore();
+    if (newId != null) setEditingActivityId(newId);
+  };
   const removeActivity = useWeeklyGridStore((s) => s.removeActivity);
   const setActivityName = useWeeklyGridStore((s) => s.setActivityName);
   const setActivityDuration = useWeeklyGridStore((s) => s.setActivityDuration);

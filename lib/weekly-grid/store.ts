@@ -11,7 +11,8 @@ function emptyDoneByDay(): Record<DayId, boolean> {
 
 type WeeklyGridState = {
   activities: ActivityRow[];
-  addActivity: () => void;
+  /** Returns the new row id when added, or `null` if add was blocked. */
+  addActivity: () => string | null;
   removeActivity: (id: string) => void;
   setActivityName: (id: string, name: string) => void;
   setActivityDuration: (id: string, durationMinutes: DurationMinutes) => void;
@@ -20,21 +21,26 @@ type WeeklyGridState = {
 
 export const useWeeklyGridStore = create<WeeklyGridState>((set) => ({
   activities: [],
-  addActivity: () =>
+  addActivity: () => {
+    const newId = crypto.randomUUID();
+    let added = false;
     set((s) => {
       if (s.activities.some((a) => !isActivityComplete(a))) return s;
+      added = true;
       return {
         activities: [
           ...s.activities,
           {
-            id: crypto.randomUUID(),
+            id: newId,
             name: "",
             durationMinutes: null,
             doneByDay: emptyDoneByDay(),
           },
         ],
       };
-    }),
+    });
+    return added ? newId : null;
+  },
   removeActivity: (id) =>
     set((s) => ({
       activities: s.activities.filter((a) => a.id !== id),
