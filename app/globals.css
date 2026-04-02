@@ -34,7 +34,8 @@ html[data-theme="paper-planner"] {
   --theme-border: #7a665a;
   --theme-input-bg: #fffef8;
   --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
-  --theme-accent: var(--theme-ink);
+  /* Deeper warm brown than body ink — same hue family, higher contrast */
+  --theme-accent: #4a3b32;
   --wc-font-title: var(--font-theme-script), cursive;
   --wc-font-subtitle: var(--font-theme-serif), Georgia, serif;
   --wc-font-table: var(--font-theme-serif), Georgia, serif;
@@ -58,7 +59,8 @@ html[data-theme="graphite"] {
   --theme-border: #4a4a46;
   --theme-input-bg: #ffffff;
   --theme-hover: color-mix(in srgb, var(--theme-ink) 9%, transparent);
-  --theme-accent: var(--theme-ink);
+  /* Same neutral as ink, stepped darker for accent emphasis */
+  --theme-accent: #161614;
   --wc-font-title: var(--font-geist-sans), system-ui, sans-serif;
   --wc-font-subtitle: var(--font-geist-sans), system-ui, sans-serif;
   --wc-font-table: var(--font-geist-sans), system-ui, sans-serif;
@@ -82,7 +84,8 @@ html[data-theme="botanical-flow"] {
   --theme-border: #5d4037;
   --theme-input-bg: #fffdf8;
   --theme-hover: color-mix(in srgb, var(--theme-ink) 7%, transparent);
-  --theme-accent: #b5745e;
+  /* Terracotta with a bit more saturation vs previous #b5745e */
+  --theme-accent: #9a4f3c;
   --theme-sage: #8f9779;
   --wc-font-title: var(--font-flow-sniglet), system-ui, sans-serif;
   --wc-font-subtitle: var(--font-flow-caveat), cursive;
