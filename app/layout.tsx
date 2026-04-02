@@ -11,7 +11,9 @@ import {
 } from "next/font/google";
 import "./globals.css";
 
-import { DEFAULT_THEME_ID, getThemeBootstrapScript } from "@/lib/themes";
+import { ThemeAppearanceRoot } from "@/components/theme-appearance-root";
+import { ThemeDocumentSync } from "@/components/theme-document-sync";
+import { getThemeBootstrapScript } from "@/lib/themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,7 +80,6 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      data-theme={DEFAULT_THEME_ID}
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dancingScript.variable} ${sniglet.variable} ${caveat.variable} ${kalam.variable} ${patrickHand.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
@@ -87,7 +88,8 @@ export default function RootLayout({
             __html: getThemeBootstrapScript(),
           }}
         />
-        {children}
+        <ThemeDocumentSync />
+        <ThemeAppearanceRoot>{children}</ThemeAppearanceRoot>
       </body>
     </html>
   );

@@ -98,6 +98,44 @@ html[data-theme="botanical-flow"] body {
   font-family: var(--wc-font-ui);
 }
 
+/* ─── Dark: `data-appearance` on <html> (inline script) or on .wc-theme-root (React) ─── */
+html[data-theme="paper-planner"][data-appearance="dark"],
+html[data-theme="paper-planner"]:has(.wc-theme-root[data-appearance="dark"]) {
+  color-scheme: dark;
+  --theme-page: #1f1a17;
+  --theme-panel: #2f2824;
+  --theme-ink: #ede4dc;
+  --theme-border: #6b5d52;
+  --theme-input-bg: #161210;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 12%, transparent);
+  --theme-accent: #c4a990;
+}
+
+html[data-theme="graphite"][data-appearance="dark"],
+html[data-theme="graphite"]:has(.wc-theme-root[data-appearance="dark"]) {
+  color-scheme: dark;
+  --theme-page: #141413;
+  --theme-panel: #1f1f1d;
+  --theme-ink: #e8e8e4;
+  --theme-border: #4a4a46;
+  --theme-input-bg: #0c0c0b;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
+  --theme-accent: #c8c8c0;
+}
+
+html[data-theme="botanical-flow"][data-appearance="dark"],
+html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
+  color-scheme: dark;
+  --theme-page: #1a1512;
+  --theme-panel: #262019;
+  --theme-ink: #efe6dc;
+  --theme-border: #7a6355;
+  --theme-input-bg: #120f0c;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 8%, transparent);
+  --theme-accent: #d4917a;
+  --theme-sage: #9aaa8a;
+}
+
 @layer components {
   .wc-table {
     width: 100%;

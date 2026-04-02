@@ -2,11 +2,17 @@ import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
 import {
+  APPEARANCE_CHANGE_EVENT,
+  DEFAULT_APPEARANCE,
   DEFAULT_THEME_ID,
   THEME_CHANGE_EVENT,
   THEME_STORAGE_KEY,
   WEEKLY_COMMIT_PERSIST_KEY,
+  applyAppearanceToDocument,
+  applyThemeAndAppearanceToDocument,
+  type AppearanceMode,
   type ThemeId,
+  parseAppearance,
   parseStoredTheme,
 } from "@/lib/themes";
 import { DAY_IDS, type DurationMinutes } from "./constants";
@@ -67,6 +73,8 @@ const noopStorage: StateStorage = {
 type WeeklyGridState = {
   themeId: ThemeId;
   setTheme: (id: ThemeId) => void;
+  appearance: AppearanceMode;
+  setAppearance: (mode: AppearanceMode) => void;
   activities: ActivityRow[];
   /** Returns the new row id when added, or `null` if add was blocked. */
   addActivity: () => string | null;
@@ -87,6 +95,14 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
         }
         if (typeof window !== "undefined") {
           window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
+        }
+      },
+      appearance: DEFAULT_APPEARANCE,
+      setAppearance: (appearance: AppearanceMode) => {
+        set({ appearance });
+        applyAppearanceToDocument(appearance);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event(APPEARANCE_CHANGE_EVENT));
         }
       },
       activities: [],
@@ -150,6 +166,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
       partialize: (s) => ({
         activities: persistedActivitiesOnly(s.activities),
         themeId: s.themeId,
+        appearance: s.appearance,
       }),
       merge: (persistedState, currentState) => {
         const next = { ...currentState };
@@ -157,10 +174,12 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
         const p = persistedState as {
           activities?: ActivityRow[];
           themeId?: ThemeId;
+          appearance?: AppearanceMode;
         };
         if (p.themeId != null) {
           next.themeId = parseStoredTheme(String(p.themeId));
         }
+        next.appearance = parseAppearance(p.appearance);
         if (Array.isArray(p.activities)) {
           next.activities = persistedActivitiesOnly(p.activities);
         }
@@ -168,9 +187,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
       },
       onRehydrateStorage: () => (state, error) => {
         if (error || !state) return;
-        if (typeof document !== "undefined") {
-          document.documentElement.dataset.theme = state.themeId;
-        }
+        applyThemeAndAppearanceToDocument(state.themeId, state.appearance);
       },
     },
   ),

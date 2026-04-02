@@ -1,3 +1,4 @@
+import { AppearanceToggle } from "@/components/appearance-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
 import { WeeklyGrid } from "@/components/WeeklyGrid";
 
@@ -11,7 +12,8 @@ export default function Page() {
             Achieve your goals one week at a time
           </p>
         </div>
-        <div className="order-1 sm:order-2 sm:pt-1">
+        <div className="order-1 flex flex-wrap items-center justify-center gap-2 sm:order-2 sm:justify-end sm:pt-1">
+          <AppearanceToggle />
           <ThemeSelector />
         </div>
       </header>
