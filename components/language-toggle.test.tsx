@@ -38,7 +38,9 @@ describe("LanguageToggle", () => {
     expect(useWeeklyGridStore.getState().locale).toBe("es");
 
     await user.click(
-      screen.getByRole("button", { name: /Switch language to English/i }),
+      screen.getByRole("button", {
+        name: /(Switch language to English|Cambiar idioma a inglés)/i,
+      }),
     );
     expect(useWeeklyGridStore.getState().locale).toBe("en");
   });

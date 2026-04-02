@@ -1,6 +1,10 @@
+"use client";
+
+import { getMessages } from "@/lib/messages";
 import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import { formatMinutes } from "@/lib/weekly-grid/format-minutes";
 import type { DayId } from "@/lib/weekly-grid/types";
+import { useWeeklyGridStore } from "@/store";
 
 type WeeklyGridFooterProps = {
   colTotals: Record<DayId, number>;
@@ -13,11 +17,14 @@ export function WeeklyGridFooter({
   durationColumnTotal,
   weekTotal,
 }: WeeklyGridFooterProps) {
+  const locale = useWeeklyGridStore((s) => s.locale);
+  const m = getMessages(locale);
+
   return (
     <tfoot>
       <tr>
         <th className="wc-th text-left" scope="row">
-          Totals
+          {m.grid.totals}
         </th>
         <td className="wc-td wc-td-panel wc-num">
           {formatMinutes(durationColumnTotal)}

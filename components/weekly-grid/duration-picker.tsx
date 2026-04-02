@@ -3,10 +3,12 @@
 import { createPortal } from "react-dom";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 
+import { getMessages } from "@/lib/messages";
 import {
   DURATION_OPTIONS,
   type DurationMinutes,
 } from "@/lib/weekly-grid/constants";
+import { useWeeklyGridStore } from "@/store";
 
 type DurationPickerProps = {
   value: DurationMinutes | null;
@@ -14,6 +16,8 @@ type DurationPickerProps = {
 };
 
 export function DurationPicker({ value, onChange }: DurationPickerProps) {
+  const locale = useWeeklyGridStore((s) => s.locale);
+  const m = getMessages(locale);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -27,9 +31,9 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
 
   const selectedLabel =
     value == null
-      ? "Select duration"
+      ? m.grid.selectDuration
       : (DURATION_OPTIONS.find((o) => o.minutes === value)?.label ??
-        "Select duration");
+        m.grid.selectDuration);
 
   useLayoutEffect(() => {
     if (!open || !btnRef.current) return;
@@ -73,7 +77,7 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
         ref={menuRef}
         id={menuId}
         role="listbox"
-        aria-label="Duration per session"
+        aria-label={m.grid.durationPerSession}
         className="wc-theme-menu wc-menu-popover fixed z-[100]"
         style={{
           top: menuPos.top,
@@ -110,7 +114,7 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? menuId : undefined}
-        aria-label="Duration per session"
+        aria-label={m.grid.durationPerSession}
         onClick={() => setOpen((v) => !v)}
       >
         <span className="block truncate text-left">{selectedLabel}</span>

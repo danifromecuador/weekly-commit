@@ -3,6 +3,7 @@
 import { Palette } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { getMessages } from "@/lib/messages";
 import { THEME_OPTIONS, type ThemeId } from "@/lib/themes";
 import { useWeeklyGridStore } from "@/store";
 
@@ -11,7 +12,9 @@ export function ThemeSelector() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const theme = useWeeklyGridStore((s) => s.themeId);
+  const locale = useWeeklyGridStore((s) => s.locale);
   const setTheme = useWeeklyGridStore((s) => s.setTheme);
+  const m = getMessages(locale);
 
   useEffect(() => {
     if (!open) return;
@@ -51,8 +54,8 @@ export function ThemeSelector() {
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-controls={open ? "theme-picker" : undefined}
-        aria-label="Choose color theme"
-        title="Theme"
+        aria-label={m.controls.chooseColorTheme}
+        title={m.controls.theme}
         onClick={() => setOpen((v) => !v)}
       >
         <Palette className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
@@ -61,7 +64,7 @@ export function ThemeSelector() {
         <ul
           id="theme-picker"
           role="listbox"
-          aria-label="Choose color theme"
+          aria-label={m.controls.chooseColorTheme}
           aria-activedescendant={`theme-option-${theme}`}
           className="wc-theme-menu absolute start-1/2 top-full z-20 mt-2 min-w-[min(12.5rem,calc(100vw-2rem))] -translate-x-1/2 sm:start-auto sm:end-0 sm:translate-x-0"
         >

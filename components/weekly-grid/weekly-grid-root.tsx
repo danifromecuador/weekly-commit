@@ -2,13 +2,17 @@
 
 import { Plus } from "lucide-react";
 
+import { getMessages } from "@/lib/messages";
 import { DAY_IDS } from "@/lib/weekly-grid/constants";
+import { useWeeklyGridStore } from "@/store";
 import { useWeeklyGrid } from "./use-weekly-grid";
 import { WeeklyGridActivityRow } from "./weekly-grid-activity-row";
 import { WeeklyGridFooter } from "./weekly-grid-footer";
 import { WeeklyGridHeader } from "./weekly-grid-header";
 
 export function WeeklyGridRoot() {
+  const locale = useWeeklyGridStore((s) => s.locale);
+  const m = getMessages(locale);
   const {
     editingActivityId,
     setEditingActivityId,
@@ -41,7 +45,7 @@ export function WeeklyGridRoot() {
         {activities.length === 0 ? (
           <tr>
             <td colSpan={colCount} className="wc-td wc-td-muted">
-              No activities yet. Use the button below to add one.
+              {m.grid.noActivities}
             </td>
           </tr>
         ) : (
@@ -66,11 +70,11 @@ export function WeeklyGridRoot() {
               className="wc-btn-icon inline-flex items-center justify-center"
               disabled={!canAddActivity}
               onClick={() => addActivity()}
-              aria-label="Add activity"
+              aria-label={m.grid.addActivity}
               title={
                 canAddActivity
-                  ? "Add activity"
-                  : "Add a goal name to every row first"
+                  ? m.grid.addActivity
+                  : m.grid.addGoalNameFirst
               }
             >
               <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />

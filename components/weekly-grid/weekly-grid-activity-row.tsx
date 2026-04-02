@@ -4,7 +4,8 @@ import { Check, Trash2 } from "lucide-react";
 import { useId, useRef } from "react";
 
 import { DurationPicker } from "@/components/weekly-grid/duration-picker";
-import { DAY_IDS, DAY_LABELS } from "@/lib/weekly-grid/constants";
+import { getMessages } from "@/lib/messages";
+import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import type { DurationMinutes } from "@/lib/weekly-grid/constants";
 import { formatMinutes } from "@/lib/weekly-grid/format-minutes";
 import { rowTotal } from "@/lib/weekly-grid/totals";
@@ -13,6 +14,7 @@ import {
   type DayId,
   isActivityComplete,
 } from "@/lib/weekly-grid/types";
+import { useWeeklyGridStore } from "@/store";
 
 type WeeklyGridActivityRowProps = {
   activity: ActivityRow;
@@ -35,6 +37,8 @@ export function WeeklyGridActivityRow({
   onDurationChange,
   onToggleDay,
 }: WeeklyGridActivityRowProps) {
+  const locale = useWeeklyGridStore((s) => s.locale);
+  const m = getMessages(locale);
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
   const deleteDialogTitleId = useId();
 
@@ -61,7 +65,7 @@ export function WeeklyGridActivityRow({
                   (e.target as HTMLInputElement).blur();
                 }
               }}
-              aria-label="Activity name"
+              aria-label={m.grid.activityName}
               autoFocus={editingActivityId === activity.id}
             />
           ) : (
@@ -78,8 +82,8 @@ export function WeeklyGridActivityRow({
               type="button"
               className="wc-btn-delete inline-flex items-center justify-center"
               onClick={() => deleteDialogRef.current?.showModal()}
-              aria-label="Remove activity"
-              title="Remove activity"
+              aria-label={m.grid.removeActivity}
+              title={m.grid.removeActivity}
             >
               <Trash2 className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
             </button>
@@ -90,7 +94,7 @@ export function WeeklyGridActivityRow({
             aria-labelledby={deleteDialogTitleId}
           >
             <h2 id={deleteDialogTitleId} className="text-sm font-semibold">
-              Remove this goal?
+              {m.grid.removeThisGoalQuestion}
             </h2>
             <p className="wc-muted-ink mt-2 text-sm leading-snug">
               {activity.name.trim() ? (
@@ -98,10 +102,10 @@ export function WeeklyGridActivityRow({
                   <span className="font-medium">
                     &ldquo;{activity.name.trim()}&rdquo;
                   </span>{" "}
-                  will be removed. This cannot be undone.
+                  {m.grid.removeNamedGoalSuffix}
                 </>
               ) : (
-                <>This row will be removed. This cannot be undone.</>
+                <>{m.grid.removeUnnamedRow}</>
               )}
             </p>
             <div className="mt-5 flex flex-wrap justify-end gap-2">
@@ -110,7 +114,7 @@ export function WeeklyGridActivityRow({
                 className="wc-btn"
                 onClick={() => deleteDialogRef.current?.close()}
               >
-                Cancel
+                {m.grid.cancel}
               </button>
               <button
                 type="button"
@@ -120,7 +124,7 @@ export function WeeklyGridActivityRow({
                   deleteDialogRef.current?.close();
                 }}
               >
-                Remove
+                {m.grid.remove}
               </button>
             </div>
           </dialog>
@@ -141,11 +145,11 @@ export function WeeklyGridActivityRow({
             disabled={!isActivityComplete(activity)}
             className="wc-day-toggle"
             onClick={() => onToggleDay(activity.id, day)}
-            aria-label={`${DAY_LABELS[day]} completed`}
+            aria-label={`${m.dayLabels[day]} ${m.grid.completedSuffix}`}
             title={
               isActivityComplete(activity)
                 ? undefined
-                : "Set a goal name and duration first"
+                : m.grid.setGoalNameAndDurationFirst
             }
           >
             {activity.doneByDay[day] ? (
