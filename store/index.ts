@@ -5,18 +5,14 @@ import { syncThemeFontStylesheet } from "@/lib/theme-fonts";
 import {
   WEEKLY_COMMIT_PERSIST_KEY,
   applyThemeAndAppearanceToDocument,
-  type AppearanceMode,
-  type ThemeId,
-  parseAppearance,
-  parseStoredTheme,
 } from "@/lib/themes";
-import type { ActivityRow } from "@/lib/weekly-grid/types";
 
 import {
   createActivitiesSlice,
   persistedActivitiesOnly,
 } from "./slices/activities-slice";
 import { createThemeSlice } from "./slices/theme-slice";
+import { mergeWeeklyCommitPersistedState } from "./merge-persisted-state";
 import { noopStorage } from "./storage";
 import type { WeeklyCommitState } from "./types";
 
@@ -38,23 +34,7 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
         themeId: s.themeId,
         appearance: s.appearance,
       }),
-      merge: (persistedState, currentState) => {
-        const next = { ...currentState };
-        if (!persistedState || typeof persistedState !== "object") return next;
-        const p = persistedState as {
-          activities?: ActivityRow[];
-          themeId?: ThemeId;
-          appearance?: AppearanceMode;
-        };
-        if (p.themeId != null) {
-          next.themeId = parseStoredTheme(String(p.themeId));
-        }
-        next.appearance = parseAppearance(p.appearance);
-        if (Array.isArray(p.activities)) {
-          next.activities = persistedActivitiesOnly(p.activities);
-        }
-        return next;
-      },
+      merge: mergeWeeklyCommitPersistedState,
       onRehydrateStorage: () => (state, error) => {
         if (error || !state) return;
         applyThemeAndAppearanceToDocument(state.themeId, state.appearance);
