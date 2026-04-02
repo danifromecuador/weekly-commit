@@ -1,17 +1,17 @@
 # Weekly Commit
 
-App para planificar metas semanales con una cuadricula de lunes a sabado, control de duracion por actividad y seguimiento visual del progreso.
+App to plan weekly goals with a Monday-to-Saturday grid, activity duration control, and visual progress tracking.
 
 ## Features
 
-- Cuadricula semanal por actividad con check de dias completados.
-- Duraciones predefinidas y totales por fila, por dia y semanal.
-- Temas (`paper-planner`, `graphite`, `botanical-flow`) y modo claro/oscuro.
-- Persistencia en `localStorage` (tema, apariencia y actividades validas).
-- Suite de tests con **Vitest + Testing Library**:
-  - 11 archivos de test
-  - 57 tests pasando
-  - cobertura de casos nominales y de excepcion (parseo invalido, SSR/no `window`, merge de estado persistido, drafts no persistibles, etc.)
+- Weekly per-activity grid with completed-day checkboxes.
+- Preset durations and totals per row, per day, and per week.
+- Themes (`paper-planner`, `graphite`, `botanical-flow`) and light/dark mode.
+- Persistence in `localStorage` (theme, appearance, and valid activities).
+- Test suite with **Vitest + Testing Library**:
+  - 11 test files
+  - 57 passing tests
+  - coverage for nominal and edge cases (invalid parsing, SSR/no `window`, persisted-state merge, non-persistable drafts, etc.)
 
 ## Stack
 
@@ -29,18 +29,18 @@ npm install
 npm run dev
 ```
 
-Abrir `http://localhost:3000`.
+Open `http://localhost:3000`.
 
 ## Scripts
 
-- `npm run dev` - desarrollo
-- `npm run build` - build de produccion
-- `npm run start` - ejecutar build
+- `npm run dev` - development
+- `npm run build` - production build
+- `npm run start` - run the build
 - `npm run lint` - eslint
-- `npm run test` - vitest en watch
-- `npm run test:run` - vitest una sola corrida
+- `npm run test` - vitest in watch mode
+- `npm run test:run` - single vitest run
 
-## Notas
+## Notes
 
-- Proyecto privado (`package.json`).
-- Config principal de tests en `vitest.config.mts` y setup en `vitest.setup.ts`.
+- Private project (`package.json`).
+- Main test config in `vitest.config.mts` and setup in `vitest.setup.ts`.
