@@ -14,6 +14,15 @@ function dayTotalForActivities(
   return sum;
 }
 
+/** Sum of each row’s session duration (ignores rows with no duration selected). */
+export function sumSessionDurations(activities: ActivityRow[]): number {
+  let sum = 0;
+  for (const activity of activities) {
+    if (activity.durationMinutes != null) sum += activity.durationMinutes;
+  }
+  return sum;
+}
+
 /** Sum of completed minutes per weekday column (Mon–Sat). */
 export function columnTotals(
   activities: ActivityRow[],

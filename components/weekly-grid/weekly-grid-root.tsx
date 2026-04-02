@@ -19,6 +19,7 @@ export function WeeklyGridRoot() {
     toggleDayCompletion,
     colTotals,
     weekTotal,
+    durationColumnTotal,
     colCount,
     canAddActivity,
   } = useWeeklyGrid();
@@ -68,7 +69,11 @@ export function WeeklyGridRoot() {
           </td>
         </tr>
       </tbody>
-      <WeeklyGridFooter colTotals={colTotals} weekTotal={weekTotal} />
+      <WeeklyGridFooter
+        colTotals={colTotals}
+        durationColumnTotal={durationColumnTotal}
+        weekTotal={weekTotal}
+      />
     </table>
     </div>
   );

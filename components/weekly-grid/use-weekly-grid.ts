@@ -4,7 +4,11 @@ import { useMemo, useState } from "react";
 
 import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
-import { columnTotals, grandTotal } from "@/lib/weekly-grid/totals";
+import {
+  columnTotals,
+  grandTotal,
+  sumSessionDurations,
+} from "@/lib/weekly-grid/totals";
 import { hasActivityName } from "@/lib/weekly-grid/types";
 
 export function useWeeklyGrid() {
@@ -25,6 +29,10 @@ export function useWeeklyGrid() {
 
   const colTotals = useMemo(() => columnTotals(activities), [activities]);
   const weekTotal = useMemo(() => grandTotal(activities), [activities]);
+  const durationColumnTotal = useMemo(
+    () => sumSessionDurations(activities),
+    [activities],
+  );
 
   const colCount = 2 + DAY_IDS.length + 1;
   const canAddActivity = activities.every(hasActivityName);
@@ -40,6 +48,7 @@ export function useWeeklyGrid() {
     toggleDayCompletion,
     colTotals,
     weekTotal,
+    durationColumnTotal,
     colCount,
     canAddActivity,
   };
