@@ -21,8 +21,8 @@ export default function Page() {
           </p>
         </div>
         <div className="order-1 flex flex-wrap items-center justify-center gap-2 sm:order-2 sm:justify-end sm:pt-1">
-          <AppearanceToggle />
           <LanguageToggle />
+          <AppearanceToggle />
           <ThemeSelector />
         </div>
       </header>
