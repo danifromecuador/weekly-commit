@@ -12,7 +12,6 @@ import {
 import "./globals.css";
 
 import { ThemeAppearanceRoot } from "@/components/theme-appearance-root";
-import { ThemeDocumentSync } from "@/components/theme-document-sync";
 import { getThemeBootstrapScript } from "@/lib/themes";
 
 const geistSans = Geist({
@@ -88,7 +87,6 @@ export default function RootLayout({
             __html: getThemeBootstrapScript(),
           }}
         />
-        <ThemeDocumentSync />
         <ThemeAppearanceRoot>{children}</ThemeAppearanceRoot>
       </body>
     </html>
