@@ -2,6 +2,10 @@
 
 import { useLayoutEffect } from "react";
 
+import {
+  applyLocaleToDocument,
+  readPersistedLocaleFromLocalStorage,
+} from "@/lib/i18n";
 import { syncThemeFontStylesheet } from "@/lib/theme-fonts";
 import {
   applyThemeAndAppearanceToDocument,
@@ -21,10 +25,13 @@ export function ThemeAppearanceRoot({
 }) {
   const themeId = useWeeklyGridStore((s) => s.themeId);
   const appearance = useWeeklyGridStore((s) => s.appearance);
+  const locale = useWeeklyGridStore((s) => s.locale);
 
   useLayoutEffect(() => {
     const fromDisk = readPersistedThemeAppearanceFromLocalStorage();
+    const persistedLocale = readPersistedLocaleFromLocalStorage();
     applyThemeAndAppearanceToDocument(fromDisk.themeId, fromDisk.appearance);
+    applyLocaleToDocument(persistedLocale);
     syncThemeFontStylesheet(fromDisk.themeId);
   }, []);
 
@@ -32,6 +39,11 @@ export function ThemeAppearanceRoot({
     if (!useWeeklyGridStore.persist.hasHydrated()) return;
     applyThemeAndAppearanceToDocument(themeId, appearance);
   }, [themeId, appearance]);
+
+  useLayoutEffect(() => {
+    if (!useWeeklyGridStore.persist.hasHydrated()) return;
+    applyLocaleToDocument(locale);
+  }, [locale]);
 
   return (
     <div

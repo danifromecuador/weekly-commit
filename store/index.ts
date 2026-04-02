@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 import { syncThemeFontStylesheet } from "@/lib/theme-fonts";
+import { applyLocaleToDocument } from "@/lib/i18n";
 import {
   WEEKLY_COMMIT_PERSIST_KEY,
   applyThemeAndAppearanceToDocument,
@@ -41,6 +42,7 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
       onRehydrateStorage: () => (state, error) => {
         if (error || !state) return;
         applyThemeAndAppearanceToDocument(state.themeId, state.appearance);
+        applyLocaleToDocument(state.locale);
         syncThemeFontStylesheet(state.themeId);
       },
     },

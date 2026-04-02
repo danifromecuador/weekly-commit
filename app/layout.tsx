@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { ThemeAppearanceRoot } from "@/components/theme-appearance-root";
+import { getLocaleBootstrapScript } from "@/lib/i18n";
 import { getThemeBootstrapScript } from "@/lib/themes";
 
 export const metadata: Metadata = {
@@ -33,6 +34,11 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: getThemeBootstrapScript(),
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: getLocaleBootstrapScript(),
           }}
         />
         <ThemeAppearanceRoot>{children}</ThemeAppearanceRoot>

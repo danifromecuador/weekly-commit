@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 import { DEFAULT_LOCALE } from "@/lib/i18n";
 import { createActivitiesSlice } from "./activities-slice";
@@ -16,6 +16,10 @@ function createFullStore() {
 }
 
 describe("createLocaleSlice", () => {
+  afterEach(() => {
+    document.documentElement.lang = "en";
+  });
+
   it("initial state is english", () => {
     const useStore = createFullStore();
     expect(useStore.getState().locale).toBe(DEFAULT_LOCALE);
@@ -25,6 +29,7 @@ describe("createLocaleSlice", () => {
     const useStore = createFullStore();
     useStore.getState().setLocale("es");
     expect(useStore.getState().locale).toBe("es");
+    expect(document.documentElement.lang).toBe("es");
   });
 });
 
