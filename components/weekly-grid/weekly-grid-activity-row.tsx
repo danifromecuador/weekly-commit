@@ -40,6 +40,10 @@ export function WeeklyGridActivityRow({
   const showNameInput =
     !activity.name.trim() || editingActivityId === activity.id;
 
+  const showDeleteControl =
+    !showNameInput ||
+    (!activity.name.trim() && editingActivityId !== activity.id);
+
   return (
     <tr className="group">
       <td className="wc-td">
@@ -68,15 +72,17 @@ export function WeeklyGridActivityRow({
               {activity.name}
             </button>
           )}
-          <button
-            type="button"
-            className="wc-btn-delete inline-flex items-center justify-center"
-            onClick={() => onRemove(activity.id)}
-            aria-label="Remove activity"
-            title="Remove activity"
-          >
-            <Trash2 className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
-          </button>
+          {showDeleteControl ? (
+            <button
+              type="button"
+              className="wc-btn-delete inline-flex items-center justify-center"
+              onClick={() => onRemove(activity.id)}
+              aria-label="Remove activity"
+              title="Remove activity"
+            >
+              <Trash2 className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
+            </button>
+          ) : null}
         </div>
       </td>
       <td className="wc-td">
