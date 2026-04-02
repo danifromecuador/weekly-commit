@@ -3,7 +3,7 @@ import { WeeklyGrid } from "@/components/WeeklyGrid";
 
 export default function Page() {
   return (
-    <main className="mx-auto flex w-full max-w-[52rem] flex-1 flex-col px-4 py-8 sm:px-6 sm:py-10 md:px-10">
+    <main className="mx-auto flex w-full max-w-[72rem] flex-1 flex-col px-4 py-8 sm:px-6 sm:py-10 md:px-10">
       <header className="mb-8 flex flex-col gap-5 sm:mb-10 sm:flex-row sm:items-start sm:justify-between">
         <div className="order-2 flex-1 text-center sm:order-1">
           <h1 className="wc-title-script text-3xl sm:text-4xl md:text-5xl">Weekly Commit</h1>

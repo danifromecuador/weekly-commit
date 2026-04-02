@@ -27,7 +27,7 @@ export function WeeklyGridRoot() {
 
   return (
     <div className="min-w-0 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
-      <table className="wc-table min-w-[36rem]">
+      <table className="wc-table min-w-[60rem]">
         <colgroup>
           <col className="wc-col-goal" />
           <col className="wc-col-duration" />

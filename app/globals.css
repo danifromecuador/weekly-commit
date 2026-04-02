@@ -112,29 +112,41 @@ html[data-theme="botanical-flow"] body {
     min-width: 0;
   }
 
+  /* Fixed widths for narrow columns; goal column absorbs the rest (table-layout: fixed). */
   .wc-col-goal {
-    width: 35%;
+    width: auto;
   }
 
   .wc-col-duration {
-    width: 12%;
+    width: 7.25rem;
   }
 
-  /* One <col> per weekday so each day column stays the same width (41% / 6). */
   .wc-col-day {
-    width: 6.8333333333%;
+    width: 5.5rem;
   }
 
   .wc-col-total {
-    width: 12%;
+    width: 5.75rem;
   }
 
   .wc-th-day,
   .wc-td-day {
-    overflow: hidden;
     text-align: center;
+  }
+
+  .wc-table thead .wc-th.wc-th-day,
+  .wc-table tbody .wc-td.wc-td-day {
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  /* Footer day totals: never ellipsis — wrap inside the fixed column if needed */
+  .wc-table tfoot .wc-td.wc-td-day {
+    overflow: visible;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.3;
   }
 
   .wc-table thead .wc-th:first-child,
