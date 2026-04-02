@@ -251,6 +251,8 @@ html[data-theme="botanical-flow"] body {
   .wc-td .wc-select {
     border-width: 0;
     box-shadow: none;
+    /* Blend with the table instead of stark --theme-input-bg white */
+    background: color-mix(in srgb, var(--theme-panel) 24%, var(--theme-page));
   }
 
   .wc-td .wc-input:focus-visible,
