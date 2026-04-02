@@ -53,7 +53,7 @@ export function WeeklyGridRoot() {
           <td colSpan={colCount} className="border border-zinc-400 p-2">
             <button
               type="button"
-              className="rounded border border-zinc-400 px-2 py-1 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded border border-zinc-400 px-2 py-1 text-sm disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!canAddActivity}
               onClick={() => addActivity()}
               title={

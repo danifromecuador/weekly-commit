@@ -68,7 +68,7 @@ export function WeeklyGridActivityRow({
           )}
           <button
             type="button"
-            className="shrink-0 rounded border border-zinc-300 px-2 py-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
+            className="shrink-0 cursor-pointer rounded border border-zinc-300 px-2 py-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
             onClick={() => onRemove(activity.id)}
             aria-label="Remove activity"
           >
