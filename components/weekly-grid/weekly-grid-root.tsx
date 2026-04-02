@@ -1,5 +1,7 @@
 "use client";
 
+import { Plus } from "lucide-react";
+
 import { useWeeklyGrid } from "./use-weekly-grid";
 import { WeeklyGridActivityRow } from "./weekly-grid-activity-row";
 import { WeeklyGridFooter } from "./weekly-grid-footer";
@@ -51,16 +53,17 @@ export function WeeklyGridRoot() {
           <td colSpan={colCount} className="wc-td">
             <button
               type="button"
-              className="wc-btn"
+              className="wc-btn-icon inline-flex items-center justify-center"
               disabled={!canAddActivity}
               onClick={() => addActivity()}
+              aria-label="Add activity"
               title={
                 canAddActivity
-                  ? undefined
+                  ? "Add activity"
                   : "Complete goal name and duration on every row first"
               }
             >
-              Add activity
+              <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
             </button>
           </td>
         </tr>

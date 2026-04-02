@@ -1,5 +1,7 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
+
 import {
   DAY_IDS,
   DAY_LABELS,
@@ -68,11 +70,12 @@ export function WeeklyGridActivityRow({
           )}
           <button
             type="button"
-            className="wc-btn-delete"
+            className="wc-btn-delete inline-flex items-center justify-center"
             onClick={() => onRemove(activity.id)}
             aria-label="Remove activity"
+            title="Remove activity"
           >
-            Delete
+            <Trash2 className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
           </button>
         </div>
       </td>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Palette } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useSyncExternalStore } from "react";
 
@@ -56,13 +57,15 @@ export function ThemeSelector() {
     >
       <button
         type="button"
-        className="wc-btn text-[0.65rem] font-semibold uppercase tracking-[0.14em]"
+        className="wc-btn-icon inline-flex items-center justify-center"
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-controls={open ? "theme-picker" : undefined}
+        aria-label="Choose color theme"
+        title="Theme"
         onClick={() => setOpen((v) => !v)}
       >
-        Theme
+        <Palette className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
       </button>
       {open ? (
         <ul

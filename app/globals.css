@@ -160,6 +160,38 @@ html[data-theme="botanical-flow"] body {
     opacity: 0.45;
   }
 
+  /* Icon-only controls: no box border; shadow follows the SVG stroke (drop-shadow). */
+  .wc-btn-icon {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--theme-ink);
+    padding: 0.375rem;
+    border-radius: var(--wc-radius-ui);
+    box-shadow: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .wc-btn-icon:hover:not(:disabled) {
+    background: var(--theme-hover);
+  }
+
+  .wc-btn-icon:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .wc-btn-icon:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+  }
+
+  .wc-btn-icon svg {
+    display: block;
+    filter: drop-shadow(0 0.5px 0.75px color-mix(in srgb, var(--theme-ink) 50%, transparent))
+      drop-shadow(0 1px 2px color-mix(in srgb, var(--theme-ink) 22%, transparent));
+  }
+
   .wc-input {
     min-width: 0;
     flex: 1 1 0%;
@@ -228,14 +260,30 @@ html[data-theme="botanical-flow"] body {
   .wc-btn-delete {
     flex-shrink: 0;
     cursor: pointer;
-    border: 1px solid var(--theme-border);
+    border: none;
     border-radius: var(--wc-radius-ui);
-    background: var(--theme-page);
+    background: transparent;
     color: var(--theme-ink);
-    padding: 0.15rem 0.5rem;
-    font-size: 0.8125rem;
+    padding: 0.375rem;
+    line-height: 0;
+    box-shadow: none;
     opacity: 1;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+  }
+
+  .wc-btn-delete:hover {
+    background: var(--theme-hover);
+  }
+
+  .wc-btn-delete:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+  }
+
+  .wc-btn-delete svg {
+    display: block;
+    filter: drop-shadow(0 0.5px 0.75px color-mix(in srgb, var(--theme-ink) 50%, transparent))
+      drop-shadow(0 1px 2px color-mix(in srgb, var(--theme-ink) 22%, transparent));
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -329,6 +377,11 @@ html[data-theme="botanical-flow"] .wc-th {
 }
 
 html[data-theme="botanical-flow"] .wc-btn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--theme-sage) 18%, var(--theme-page));
+}
+
+html[data-theme="botanical-flow"] .wc-btn-icon:hover:not(:disabled),
+html[data-theme="botanical-flow"] .wc-btn-delete:hover {
   background: color-mix(in srgb, var(--theme-sage) 18%, var(--theme-page));
 }
 
