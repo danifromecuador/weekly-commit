@@ -305,13 +305,18 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
   .wc-td .wc-select {
     border-width: 0;
     box-shadow: none;
-    /* Blend with the table instead of stark --theme-input-bg white */
-    background: color-mix(in srgb, var(--theme-panel) 24%, var(--theme-page));
+    background: transparent;
   }
 
   .wc-td .wc-input:focus-visible,
   .wc-td .wc-select:focus-visible {
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+    box-shadow: none;
+    outline: none;
+  }
+
+  .wc-td .wc-input:active {
+    outline: none;
+    box-shadow: none;
   }
 
   .wc-select {
@@ -335,7 +340,7 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
     cursor: pointer;
     border: none;
     border-radius: var(--wc-radius-ui);
-    background: color-mix(in srgb, var(--theme-panel) 24%, var(--theme-page));
+    background: transparent;
     color: var(--theme-ink);
     padding: 0.2rem 0.35rem;
     font: inherit;
@@ -369,12 +374,17 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
   }
 
   .wc-goal-button:hover {
-    background: var(--theme-hover);
+    background: transparent;
+  }
+
+  .wc-goal-button:active {
+    border-color: transparent;
+    outline: none;
   }
 
   .wc-goal-button:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--theme-ink) 38%, transparent);
-    outline-offset: 1px;
+    outline: none;
+    box-shadow: none;
   }
 
   .wc-btn-delete {
