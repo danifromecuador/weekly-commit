@@ -39,6 +39,8 @@ html[data-theme="paper-planner"] {
   --wc-font-subtitle: var(--font-theme-serif), Georgia, serif;
   --wc-font-table: var(--font-theme-serif), Georgia, serif;
   --wc-font-ui: var(--font-theme-serif), Georgia, "Times New Roman", serif;
+  --wc-radius-table: 16px;
+  --wc-radius-ui: 12px;
 }
 
 html[data-theme="paper-planner"] body {
@@ -61,6 +63,8 @@ html[data-theme="graphite"] {
   --wc-font-subtitle: var(--font-geist-sans), system-ui, sans-serif;
   --wc-font-table: var(--font-geist-sans), system-ui, sans-serif;
   --wc-font-ui: var(--font-geist-sans), system-ui, sans-serif;
+  --wc-radius-table: 16px;
+  --wc-radius-ui: 12px;
 }
 
 html[data-theme="graphite"] body {
@@ -537,32 +541,37 @@ html[data-theme="botanical-flow"] .wc-btn-delete:hover {
 }
 
 /*
- * Rounded table + collapse + overflow:hidden hides internal grid lines in
- * WebKit/Blink. Use separated borders with a right/bottom grid for botanical.
+ * Rounded table + border-collapse hides internal lines in WebKit/Blink.
+ * Separated borders + right/bottom grid for all rounded weekly-commit themes.
  */
-html[data-theme="botanical-flow"] .wc-table {
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"])
+  .wc-table {
   border-collapse: separate;
   border-spacing: 0;
 }
 
-html[data-theme="botanical-flow"] .wc-th,
-html[data-theme="botanical-flow"] .wc-td {
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"]) .wc-th,
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"]) .wc-td {
   border-style: solid;
   border-color: var(--theme-border);
   border-width: 0 1px 1px 0;
 }
 
-html[data-theme="botanical-flow"] thead .wc-th {
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"])
+  thead
+  .wc-th {
   border-top-width: 0;
 }
 
-html[data-theme="botanical-flow"] .wc-th:last-child,
-html[data-theme="botanical-flow"] .wc-td:last-child {
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"])
+  .wc-th:last-child,
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"])
+  .wc-td:last-child {
   border-right-width: 0;
 }
 
-html[data-theme="botanical-flow"] tfoot .wc-th,
-html[data-theme="botanical-flow"] tfoot .wc-td {
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"]) tfoot .wc-th,
+html:is([data-theme="paper-planner"], [data-theme="graphite"], [data-theme="botanical-flow"]) tfoot .wc-td {
   border-bottom-width: 0;
 }
 
