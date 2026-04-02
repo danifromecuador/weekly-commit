@@ -23,7 +23,7 @@ export function WeeklyGridFooter({
           {formatMinutes(durationColumnTotal)}
         </td>
         {DAY_IDS.map((day) => (
-          <td key={day} className="wc-td wc-td-panel wc-num">
+          <td key={day} className="wc-td wc-td-panel wc-num wc-td-day">
             {formatMinutes(colTotals[day])}
           </td>
         ))}

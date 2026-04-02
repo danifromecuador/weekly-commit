@@ -2,6 +2,7 @@
 
 import { Plus } from "lucide-react";
 
+import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import { useWeeklyGrid } from "./use-weekly-grid";
 import { WeeklyGridActivityRow } from "./weekly-grid-activity-row";
 import { WeeklyGridFooter } from "./weekly-grid-footer";
@@ -27,7 +28,15 @@ export function WeeklyGridRoot() {
   return (
     <div className="min-w-0 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
       <table className="wc-table min-w-[36rem]">
-      <WeeklyGridHeader />
+        <colgroup>
+          <col className="wc-col-goal" />
+          <col className="wc-col-duration" />
+          {DAY_IDS.map((day) => (
+            <col key={day} className="wc-col-day" />
+          ))}
+          <col className="wc-col-total" />
+        </colgroup>
+        <WeeklyGridHeader />
       <tbody>
         {activities.length === 0 ? (
           <tr>

@@ -151,10 +151,10 @@ export function WeeklyGridActivityRow({
         </select>
       </td>
       {DAY_IDS.map((day) => (
-        <td key={day} className="wc-td text-center">
+        <td key={day} className="wc-td wc-td-day text-center">
           <input
             type="checkbox"
-            className="wc-checkbox"
+            className="wc-checkbox inline-block"
             checked={activity.doneByDay[day]}
             disabled={!isActivityComplete(activity)}
             onChange={() => onToggleDay(activity.id, day)}

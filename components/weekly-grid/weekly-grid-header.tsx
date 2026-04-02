@@ -12,7 +12,7 @@ export function WeeklyGridHeader() {
         {DAY_IDS.map((day) => (
           <th
             key={day}
-            className="wc-th text-center"
+            className="wc-th wc-th-day text-center"
             scope="col"
             aria-label={DAY_LABELS[day]}
           >

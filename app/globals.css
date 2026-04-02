@@ -97,6 +97,7 @@ html[data-theme="botanical-flow"] body {
 @layer components {
   .wc-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     font-size: 0.875rem;
     line-height: 1.35;
@@ -104,6 +105,43 @@ html[data-theme="botanical-flow"] body {
     border-radius: var(--wc-radius-table);
     overflow: hidden;
     background: var(--theme-page);
+  }
+
+  .wc-table .wc-th,
+  .wc-table .wc-td {
+    min-width: 0;
+  }
+
+  .wc-col-goal {
+    width: 35%;
+  }
+
+  .wc-col-duration {
+    width: 12%;
+  }
+
+  /* One <col> per weekday so each day column stays the same width (41% / 6). */
+  .wc-col-day {
+    width: 6.8333333333%;
+  }
+
+  .wc-col-total {
+    width: 12%;
+  }
+
+  .wc-th-day,
+  .wc-td-day {
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .wc-table thead .wc-th:first-child,
+  .wc-table tbody .wc-td:first-child,
+  .wc-table tfoot .wc-th:first-child {
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   .wc-th {
@@ -298,9 +336,45 @@ html[data-theme="botanical-flow"] body {
   }
 
   .wc-checkbox {
-    accent-color: var(--theme-accent, var(--theme-ink));
+    appearance: none;
+    -webkit-appearance: none;
     width: 1rem;
     height: 1rem;
+    min-width: 1rem;
+    min-height: 1rem;
+    max-width: 1rem;
+    max-height: 1rem;
+    margin: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    vertical-align: middle;
+    border: 1.5px solid var(--theme-border);
+    border-radius: 3px;
+    background: var(--theme-input-bg);
+    cursor: pointer;
+    transition:
+      background-color 0.12s ease,
+      border-color 0.12s ease,
+      opacity 0.12s ease;
+  }
+
+  .wc-checkbox:checked {
+    background-color: var(--theme-accent, var(--theme-ink));
+    border-color: var(--theme-accent, var(--theme-ink));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M3.5 8 6.5 11 12.5 4'/%3E%3C/svg%3E");
+    background-size: 0.625rem auto;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .wc-checkbox:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .wc-checkbox:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
   }
 
   .wc-title-script {
