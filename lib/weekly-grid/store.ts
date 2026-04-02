@@ -23,6 +23,11 @@ function emptyDoneByDay(): Record<DayId, boolean> {
   ) as Record<DayId, boolean>;
 }
 
+/** Draft rows (no trimmed name) must not be written to or restored from storage. */
+function persistedActivitiesOnly(activities: ActivityRow[]): ActivityRow[] {
+  return activities.filter(hasActivityName);
+}
+
 function weeklyCommitInnerStorage(): StateStorage {
   return {
     getItem: (name) => {
@@ -143,9 +148,24 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
         typeof window !== "undefined" ? weeklyCommitInnerStorage() : noopStorage,
       ),
       partialize: (s) => ({
-        activities: s.activities,
+        activities: persistedActivitiesOnly(s.activities),
         themeId: s.themeId,
       }),
+      merge: (persistedState, currentState) => {
+        const next = { ...currentState };
+        if (!persistedState || typeof persistedState !== "object") return next;
+        const p = persistedState as {
+          activities?: ActivityRow[];
+          themeId?: ThemeId;
+        };
+        if (p.themeId != null) {
+          next.themeId = parseStoredTheme(String(p.themeId));
+        }
+        if (Array.isArray(p.activities)) {
+          next.activities = persistedActivitiesOnly(p.activities);
+        }
+        return next;
+      },
       onRehydrateStorage: () => (state, error) => {
         if (error || !state) return;
         if (typeof document !== "undefined") {
