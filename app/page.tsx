@@ -1,5 +1,9 @@
+import { WeeklyGrid } from "@/components/WeeklyGrid";
+
 export default function Page() {
   return (
-    <div>Hello World</div>
-  )
+    <main className="p-4">
+      <WeeklyGrid />
+    </main>
+  );
 }
