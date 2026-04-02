@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash2 } from "lucide-react";
+import { Check, Trash2 } from "lucide-react";
 import { useId, useRef } from "react";
 
 import { DurationPicker } from "@/components/weekly-grid/duration-picker";
@@ -133,20 +133,29 @@ export function WeeklyGridActivityRow({
         />
       </td>
       {DAY_IDS.map((day) => (
-        <td key={day} className="wc-td wc-td-day text-center">
-          <input
-            type="checkbox"
-            className="wc-checkbox inline-block"
-            checked={activity.doneByDay[day]}
+        <td key={day} className="wc-td wc-td-day wc-td-day-toggle-cell text-center">
+          <button
+            type="button"
+            role="checkbox"
+            aria-checked={activity.doneByDay[day]}
             disabled={!isActivityComplete(activity)}
-            onChange={() => onToggleDay(activity.id, day)}
+            className="wc-day-toggle"
+            onClick={() => onToggleDay(activity.id, day)}
             aria-label={`${DAY_LABELS[day]} completed`}
             title={
               isActivityComplete(activity)
                 ? undefined
                 : "Set a goal name and duration first"
             }
-          />
+          >
+            {activity.doneByDay[day] ? (
+              <Check
+                className="wc-day-toggle-check"
+                strokeWidth={2.75}
+                aria-hidden
+              />
+            ) : null}
+          </button>
         </td>
       ))}
       <td className="wc-td wc-num">{formatMinutes(rowTotal(activity))}</td>
