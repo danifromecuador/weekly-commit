@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
 import { columnTotals, grandTotal } from "@/lib/weekly-grid/totals";
-import { isActivityComplete } from "@/lib/weekly-grid/types";
+import { hasActivityName } from "@/lib/weekly-grid/types";
 
 export function useWeeklyGrid() {
   const [editingActivityId, setEditingActivityId] = useState<string | null>(
@@ -27,7 +27,7 @@ export function useWeeklyGrid() {
   const weekTotal = useMemo(() => grandTotal(activities), [activities]);
 
   const colCount = 2 + DAY_IDS.length + 1;
-  const canAddActivity = activities.every(isActivityComplete);
+  const canAddActivity = activities.every(hasActivityName);
 
   return {
     editingActivityId,

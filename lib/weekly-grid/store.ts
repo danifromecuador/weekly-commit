@@ -1,7 +1,12 @@
 import { create } from "zustand";
 
 import { DAY_IDS, type DurationMinutes } from "./constants";
-import { type ActivityRow, type DayId, isActivityComplete } from "./types";
+import {
+  type ActivityRow,
+  type DayId,
+  hasActivityName,
+  isActivityComplete,
+} from "./types";
 
 function emptyDoneByDay(): Record<DayId, boolean> {
   return Object.fromEntries(
@@ -25,7 +30,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>((set) => ({
     const newId = crypto.randomUUID();
     let added = false;
     set((s) => {
-      if (s.activities.some((a) => !isActivityComplete(a))) return s;
+      if (s.activities.some((a) => !hasActivityName(a))) return s;
       added = true;
       return {
         activities: [

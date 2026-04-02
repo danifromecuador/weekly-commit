@@ -60,7 +60,7 @@ export function WeeklyGridRoot() {
               title={
                 canAddActivity
                   ? "Add activity"
-                  : "Complete goal name and duration on every row first"
+                  : "Add a goal name to every row first"
               }
             >
               <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />

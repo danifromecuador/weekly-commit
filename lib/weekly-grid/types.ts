@@ -10,7 +10,12 @@ export type ActivityRow = {
   doneByDay: Record<DayId, boolean>;
 };
 
-/** Name (non-empty after trim) and duration chosen; required to add another row or use day checkboxes. */
+/** Non-empty goal name (trimmed); required to add another row. */
+export function hasActivityName(activity: ActivityRow): boolean {
+  return activity.name.trim().length > 0;
+}
+
+/** Name and duration chosen; required for day checkboxes and row time totals. */
 export function isActivityComplete(activity: ActivityRow): boolean {
-  return activity.name.trim().length > 0 && activity.durationMinutes != null;
+  return hasActivityName(activity) && activity.durationMinutes != null;
 }
