@@ -11,19 +11,16 @@ export function WeeklyGridFooter({ colTotals, weekTotal }: WeeklyGridFooterProps
   return (
     <tfoot>
       <tr>
-        <th className="border border-zinc-400 p-2 text-left" scope="row">
+        <th className="wc-th text-left" scope="row">
           Totals
         </th>
-        <td className="border border-zinc-400 p-2 text-zinc-400">—</td>
+        <td className="wc-td wc-td-panel wc-num wc-muted-ink">—</td>
         {DAY_IDS.map((day) => (
-          <td
-            key={day}
-            className="border border-zinc-400 p-2 text-center tabular-nums"
-          >
+          <td key={day} className="wc-td wc-td-panel wc-num">
             {formatMinutes(colTotals[day])}
           </td>
         ))}
-        <td className="border border-zinc-400 p-2 text-center font-medium tabular-nums">
+        <td className="wc-td wc-td-panel wc-num font-semibold">
           {formatMinutes(weekTotal)}
         </td>
       </tr>

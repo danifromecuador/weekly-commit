@@ -13,13 +13,209 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not([data-theme]) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
 
-body {
+/* ─── Theme: paper planner (warm paper + dusty rose panels, taupe ink) ─── */
+html[data-theme="paper-planner"] {
+  color-scheme: light;
+  --theme-page: #f9ebe3;
+  --theme-panel: #eac9bd;
+  --theme-ink: #7a665a;
+  --theme-border: #7a665a;
+  --theme-input-bg: #fffef8;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
+}
+
+html[data-theme="paper-planner"] body {
+  background-color: var(--theme-page);
+  color: var(--theme-ink);
+  font-family: var(--font-theme-serif), Georgia, "Times New Roman", serif;
+}
+
+/* ─── Theme: graphite (cool neutral, sans body) ─── */
+html[data-theme="graphite"] {
+  color-scheme: light;
+  --theme-page: #f4f4f2;
+  --theme-panel: #e0e0dc;
+  --theme-ink: #2a2a28;
+  --theme-border: #4a4a46;
+  --theme-input-bg: #ffffff;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 9%, transparent);
+}
+
+html[data-theme="graphite"] body {
+  background-color: var(--theme-page);
+  color: var(--theme-ink);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@layer components {
+  .wc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    border: 1px solid var(--theme-border);
+    background: var(--theme-page);
+  }
+
+  .wc-th {
+    border: 1px solid var(--theme-border);
+    padding: 0.5rem 0.625rem;
+    background: var(--theme-panel);
+    color: var(--theme-ink);
+    font-family: var(--font-theme-serif), Georgia, serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .wc-td {
+    border: 1px solid var(--theme-border);
+    padding: 0.375rem 0.5rem;
+    vertical-align: middle;
+    background: transparent;
+    color: var(--theme-ink);
+  }
+
+  .wc-td-muted {
+    padding: 1rem 1.25rem;
+    color: color-mix(in srgb, var(--theme-ink) 72%, transparent);
+  }
+
+  .wc-td-panel {
+    background: var(--theme-panel);
+  }
+
+  .wc-num {
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  .wc-btn {
+    cursor: pointer;
+    border: 1px solid var(--theme-border);
+    background: var(--theme-page);
+    color: var(--theme-ink);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0;
+    transition: background-color 0.15s ease;
+  }
+
+  .wc-btn:hover:not(:disabled) {
+    background: var(--theme-panel);
+  }
+
+  .wc-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .wc-input {
+    min-width: 0;
+    flex: 1 1 0%;
+    border: 1px solid var(--theme-border);
+    border-radius: 0;
+    background: var(--theme-input-bg);
+    color: var(--theme-ink);
+    padding: 0.2rem 0.45rem;
+    outline: none;
+    font: inherit;
+  }
+
+  .wc-input:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--theme-ink) 38%, transparent);
+    outline-offset: 1px;
+  }
+
+  .wc-select {
+    width: 100%;
+    border: 1px solid var(--theme-border);
+    border-radius: 0;
+    background: var(--theme-input-bg);
+    color: var(--theme-ink);
+    padding: 0.2rem 0.35rem;
+    font: inherit;
+  }
+
+  .wc-goal-button {
+    min-width: 0;
+    flex: 1 1 0%;
+    cursor: text;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    padding: 0.2rem 0.45rem;
+    font: inherit;
+  }
+
+  .wc-goal-button:hover {
+    background: var(--theme-hover);
+  }
+
+  .wc-goal-button:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--theme-ink) 38%, transparent);
+    outline-offset: 1px;
+  }
+
+  .wc-btn-delete {
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 1px solid var(--theme-border);
+    border-radius: 0;
+    background: var(--theme-page);
+    color: var(--theme-ink);
+    padding: 0.15rem 0.5rem;
+    font-size: 0.8125rem;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .group:hover .wc-btn-delete,
+  .wc-btn-delete:focus-visible {
+    opacity: 1;
+  }
+
+  .wc-checkbox {
+    accent-color: var(--theme-ink);
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .wc-title-script {
+    font-family: var(--font-theme-script), cursive;
+    color: var(--theme-ink);
+    line-height: 1.2;
+  }
+
+  .wc-title-sub {
+    font-family: var(--font-theme-serif), Georgia, serif;
+    color: color-mix(in srgb, var(--theme-ink) 78%, transparent);
+  }
+
+  .wc-muted-ink {
+    color: color-mix(in srgb, var(--theme-ink) 48%, transparent);
+  }
+}
+
+/* After @layer so these win over .wc-th / .wc-title-sub in components layer */
+html[data-theme="graphite"] .wc-th {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+html[data-theme="graphite"] .wc-title-sub {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+html:not([data-theme]) body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;

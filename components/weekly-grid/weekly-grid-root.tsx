@@ -22,15 +22,12 @@ export function WeeklyGridRoot() {
   } = useWeeklyGrid();
 
   return (
-    <table className="w-full border-collapse border border-zinc-400 text-sm">
+    <table className="wc-table">
       <WeeklyGridHeader />
       <tbody>
         {activities.length === 0 ? (
           <tr>
-            <td
-              colSpan={colCount}
-              className="border border-zinc-400 p-4 text-zinc-500"
-            >
+            <td colSpan={colCount} className="wc-td wc-td-muted">
               No activities yet. Use the button below to add one.
             </td>
           </tr>
@@ -50,10 +47,10 @@ export function WeeklyGridRoot() {
           ))
         )}
         <tr>
-          <td colSpan={colCount} className="border border-zinc-400 p-2">
+          <td colSpan={colCount} className="wc-td">
             <button
               type="button"
-              className="cursor-pointer rounded border border-zinc-400 px-2 py-1 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              className="wc-btn"
               disabled={!canAddActivity}
               onClick={() => addActivity()}
               title={

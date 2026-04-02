@@ -4,14 +4,14 @@ export function WeeklyGridHeader() {
   return (
     <thead>
       <tr>
-        <th className="border border-zinc-400 p-2 text-left">Goal</th>
-        <th className="border border-zinc-400 p-2 text-left">Duration</th>
+        <th className="wc-th text-left">Goal</th>
+        <th className="wc-th text-left">Duration</th>
         {DAY_IDS.map((day) => (
-          <th key={day} className="border border-zinc-400 p-2 text-center">
+          <th key={day} className="wc-th text-center">
             {DAY_LABELS[day]}
           </th>
         ))}
-        <th className="border border-zinc-400 p-2 text-center">Total</th>
+        <th className="wc-th text-center">Total</th>
       </tr>
     </thead>
   );

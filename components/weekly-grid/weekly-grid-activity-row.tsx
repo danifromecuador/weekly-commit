@@ -40,11 +40,11 @@ export function WeeklyGridActivityRow({
 
   return (
     <tr className="group">
-      <td className="border border-zinc-400 p-1 align-middle">
+      <td className="wc-td">
         <div className="flex items-center gap-1">
           {showNameInput ? (
             <input
-              className="min-w-0 flex-1 rounded border border-zinc-300 bg-white px-1 py-0.5 outline-none focus-visible:ring-1 focus-visible:ring-zinc-400"
+              className="wc-input"
               value={activity.name}
               onChange={(e) => onNameChange(activity.id, e.target.value)}
               onBlur={onExitNameEdit}
@@ -60,7 +60,7 @@ export function WeeklyGridActivityRow({
           ) : (
             <button
               type="button"
-              className="min-w-0 flex-1 cursor-text rounded border border-transparent px-1 py-0.5 text-left outline-none hover:bg-zinc-100/80 focus-visible:ring-1 focus-visible:ring-zinc-400"
+              className="wc-goal-button"
               onClick={() => onStartNameEdit(activity.id)}
             >
               {activity.name}
@@ -68,7 +68,7 @@ export function WeeklyGridActivityRow({
           )}
           <button
             type="button"
-            className="shrink-0 cursor-pointer rounded border border-zinc-300 px-2 py-0.5 opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100"
+            className="wc-btn-delete"
             onClick={() => onRemove(activity.id)}
             aria-label="Remove activity"
           >
@@ -76,9 +76,9 @@ export function WeeklyGridActivityRow({
           </button>
         </div>
       </td>
-      <td className="border border-zinc-400 p-1 align-middle">
+      <td className="wc-td">
         <select
-          className="w-full rounded border border-zinc-300 px-1 py-0.5"
+          className="wc-select"
           value={activity.durationMinutes ?? ""}
           onChange={(e) => {
             const raw = e.target.value;
@@ -98,12 +98,10 @@ export function WeeklyGridActivityRow({
         </select>
       </td>
       {DAY_IDS.map((day) => (
-        <td
-          key={day}
-          className="border border-zinc-400 p-1 text-center align-middle"
-        >
+        <td key={day} className="wc-td text-center">
           <input
             type="checkbox"
+            className="wc-checkbox"
             checked={activity.doneByDay[day]}
             disabled={!isActivityComplete(activity)}
             onChange={() => onToggleDay(activity.id, day)}
@@ -116,9 +114,7 @@ export function WeeklyGridActivityRow({
           />
         </td>
       ))}
-      <td className="border border-zinc-400 p-2 text-center align-middle tabular-nums">
-        {formatMinutes(rowTotal(activity))}
-      </td>
+      <td className="wc-td wc-num">{formatMinutes(rowTotal(activity))}</td>
     </tr>
   );
 }
