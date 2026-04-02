@@ -1,3 +1,5 @@
+import { THEME_GOOGLE_FONTS_CSS_URL } from "./theme-fonts";
+
 /**
  * Theme ids match `data-theme` on `<html>` and a `[data-theme="…"]` block in
  * `app/globals.css`.
@@ -110,5 +112,6 @@ export function getThemeBootstrapScript(): string {
   const persistKey = JSON.stringify(WEEKLY_COMMIT_PERSIST_KEY);
   const legacyKey = JSON.stringify(THEME_STORAGE_KEY);
   const defTheme = JSON.stringify(DEFAULT_THEME_ID);
-  return `!function(){try{var a=${allowed};var pk=${persistKey};var lk=${legacyKey};var def=${defTheme};var el=document.documentElement;var theme=null;var merged=localStorage.getItem(pk);if(merged){var o=JSON.parse(merged);if(o&&o.state){if(o.state.themeId&&a.indexOf(o.state.themeId)!==-1){theme=o.state.themeId;el.setAttribute("data-theme",theme);}if(o.state.appearance==="dark")el.setAttribute("data-appearance","dark");}}if(theme==null){var t=localStorage.getItem(lk);if(t&&a.indexOf(t)!==-1)el.setAttribute("data-theme",t);}if(!el.getAttribute("data-theme"))el.setAttribute("data-theme",def);}catch(e){}}();`;
+  const fontUrls = JSON.stringify(THEME_GOOGLE_FONTS_CSS_URL);
+  return `!function(){try{var a=${allowed};var pk=${persistKey};var lk=${legacyKey};var def=${defTheme};var fu=${fontUrls};var el=document.documentElement;var theme=null;var merged=localStorage.getItem(pk);if(merged){var o=JSON.parse(merged);if(o&&o.state){if(o.state.themeId&&a.indexOf(o.state.themeId)!==-1){theme=o.state.themeId;el.setAttribute("data-theme",theme);}if(o.state.appearance==="dark")el.setAttribute("data-appearance","dark");}}if(theme==null){var t=localStorage.getItem(lk);if(t&&a.indexOf(t)!==-1)el.setAttribute("data-theme",t);}if(!el.getAttribute("data-theme"))el.setAttribute("data-theme",def);var th=el.getAttribute("data-theme")||def;var u=fu[th]||fu[def];if(u){var id="wc-theme-fonts";var L=document.getElementById(id);if(L){if(L.getAttribute("href")!==u)L.setAttribute("href",u);}else{L=document.createElement("link");L.id=id;L.rel="stylesheet";L.href=u;document.head.appendChild(L);}}}catch(e){}}();`;
 }

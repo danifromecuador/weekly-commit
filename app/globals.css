@@ -8,8 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Theme faces load per `data-theme` via Google Fonts link; no next/font vars */
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,10 +37,10 @@ html[data-theme="paper-planner"] {
   --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
   /* Deeper warm brown than body ink — same hue family, higher contrast */
   --theme-accent: #4a3b32;
-  --wc-font-title: var(--font-theme-script), cursive;
-  --wc-font-subtitle: var(--font-theme-serif), Georgia, serif;
-  --wc-font-table: var(--font-theme-serif), Georgia, serif;
-  --wc-font-ui: var(--font-theme-serif), Georgia, "Times New Roman", serif;
+  --wc-font-title: "Dancing Script", cursive;
+  --wc-font-subtitle: "Playfair Display", Georgia, serif;
+  --wc-font-table: "Playfair Display", Georgia, serif;
+  --wc-font-ui: "Playfair Display", Georgia, "Times New Roman", serif;
   --wc-radius-table: 16px;
   --wc-radius-ui: 12px;
 }
@@ -61,10 +62,10 @@ html[data-theme="graphite"] {
   --theme-hover: color-mix(in srgb, var(--theme-ink) 9%, transparent);
   /* Same neutral as ink, stepped darker for accent emphasis */
   --theme-accent: #161614;
-  --wc-font-title: var(--font-geist-sans), system-ui, sans-serif;
-  --wc-font-subtitle: var(--font-geist-sans), system-ui, sans-serif;
-  --wc-font-table: var(--font-geist-sans), system-ui, sans-serif;
-  --wc-font-ui: var(--font-geist-sans), system-ui, sans-serif;
+  --wc-font-title: "Geist", system-ui, sans-serif;
+  --wc-font-subtitle: "Geist", system-ui, sans-serif;
+  --wc-font-table: "Geist", system-ui, sans-serif;
+  --wc-font-ui: "Geist", system-ui, sans-serif;
   --wc-radius-table: 16px;
   --wc-radius-ui: 12px;
 }
@@ -87,10 +88,10 @@ html[data-theme="botanical-flow"] {
   /* Terracotta with a bit more saturation vs previous #b5745e */
   --theme-accent: #9a4f3c;
   --theme-sage: #8f9779;
-  --wc-font-title: var(--font-flow-sniglet), system-ui, sans-serif;
-  --wc-font-subtitle: var(--font-flow-caveat), cursive;
-  --wc-font-table: var(--font-flow-kalam), cursive;
-  --wc-font-ui: var(--font-flow-patrick), "Segoe Print", "Comic Sans MS", cursive;
+  --wc-font-title: "Sniglet", system-ui, sans-serif;
+  --wc-font-subtitle: "Caveat", cursive;
+  --wc-font-table: "Kalam", cursive;
+  --wc-font-ui: "Patrick Hand", "Segoe Print", "Comic Sans MS", cursive;
   --wc-radius-table: 16px;
   --wc-radius-ui: 12px;
 }

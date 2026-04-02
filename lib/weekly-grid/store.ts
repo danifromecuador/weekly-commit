@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
+import { syncThemeFontStylesheet } from "@/lib/theme-fonts";
 import {
   APPEARANCE_CHANGE_EVENT,
   DEFAULT_APPEARANCE,
@@ -92,6 +93,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
         set({ themeId });
         if (typeof document !== "undefined") {
           document.documentElement.dataset.theme = themeId;
+          syncThemeFontStylesheet(themeId);
         }
         if (typeof window !== "undefined") {
           window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
@@ -188,6 +190,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>()(
       onRehydrateStorage: () => (state, error) => {
         if (error || !state) return;
         applyThemeAndAppearanceToDocument(state.themeId, state.appearance);
+        syncThemeFontStylesheet(state.themeId);
       },
     },
   ),

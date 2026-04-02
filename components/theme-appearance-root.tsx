@@ -2,6 +2,7 @@
 
 import { useLayoutEffect } from "react";
 
+import { syncThemeFontStylesheet } from "@/lib/theme-fonts";
 import {
   applyThemeAndAppearanceToDocument,
   readPersistedThemeAppearanceFromLocalStorage,
@@ -24,6 +25,7 @@ export function ThemeAppearanceRoot({
   useLayoutEffect(() => {
     const fromDisk = readPersistedThemeAppearanceFromLocalStorage();
     applyThemeAndAppearanceToDocument(fromDisk.themeId, fromDisk.appearance);
+    syncThemeFontStylesheet(fromDisk.themeId);
   }, []);
 
   useLayoutEffect(() => {
