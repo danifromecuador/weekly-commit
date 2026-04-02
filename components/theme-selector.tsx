@@ -2,26 +2,16 @@
 
 import { Palette } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useSyncExternalStore } from "react";
 
-import {
-  DEFAULT_THEME_ID,
-  THEME_OPTIONS,
-  applyTheme,
-  readStoredTheme,
-  subscribeTheme,
-  type ThemeId,
-} from "@/lib/themes";
+import { THEME_OPTIONS, type ThemeId } from "@/lib/themes";
+import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
 
 export function ThemeSelector() {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  const theme = useSyncExternalStore(
-    subscribeTheme,
-    readStoredTheme,
-    () => DEFAULT_THEME_ID,
-  );
+  const theme = useWeeklyGridStore((s) => s.themeId);
+  const setTheme = useWeeklyGridStore((s) => s.setTheme);
 
   useEffect(() => {
     if (!open) return;
@@ -46,7 +36,7 @@ export function ThemeSelector() {
   }, [open]);
 
   const pick = (id: ThemeId) => {
-    applyTheme(id);
+    setTheme(id);
     setOpen(false);
   };
 

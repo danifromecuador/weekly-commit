@@ -1,5 +1,14 @@
 import { create } from "zustand";
+import { createJSONStorage, persist, type StateStorage } from "zustand/middleware";
 
+import {
+  DEFAULT_THEME_ID,
+  THEME_CHANGE_EVENT,
+  THEME_STORAGE_KEY,
+  WEEKLY_COMMIT_PERSIST_KEY,
+  type ThemeId,
+  parseStoredTheme,
+} from "@/lib/themes";
 import { DAY_IDS, type DurationMinutes } from "./constants";
 import {
   type ActivityRow,
@@ -14,7 +23,45 @@ function emptyDoneByDay(): Record<DayId, boolean> {
   ) as Record<DayId, boolean>;
 }
 
+function weeklyCommitInnerStorage(): StateStorage {
+  return {
+    getItem: (name) => {
+      try {
+        const raw = localStorage.getItem(name);
+        if (raw) return raw;
+        if (name !== WEEKLY_COMMIT_PERSIST_KEY) return null;
+        const legacy = localStorage.getItem(THEME_STORAGE_KEY);
+        if (legacy === null) return null;
+        const themeId = parseStoredTheme(legacy);
+        return JSON.stringify({
+          state: {
+            activities: [] as ActivityRow[],
+            themeId,
+          },
+          version: 0,
+        });
+      } catch {
+        return null;
+      }
+    },
+    setItem: (name, value) => {
+      localStorage.setItem(name, value);
+    },
+    removeItem: (name) => {
+      localStorage.removeItem(name);
+    },
+  };
+}
+
+const noopStorage: StateStorage = {
+  getItem: () => null,
+  setItem: () => {},
+  removeItem: () => {},
+};
+
 type WeeklyGridState = {
+  themeId: ThemeId;
+  setTheme: (id: ThemeId) => void;
   activities: ActivityRow[];
   /** Returns the new row id when added, or `null` if add was blocked. */
   addActivity: () => string | null;
@@ -24,57 +71,95 @@ type WeeklyGridState = {
   toggleDayCompletion: (id: string, day: DayId) => void;
 };
 
-export const useWeeklyGridStore = create<WeeklyGridState>((set) => ({
-  activities: [],
-  addActivity: () => {
-    const newId = crypto.randomUUID();
-    let added = false;
-    set((s) => {
-      if (s.activities.some((a) => !hasActivityName(a))) return s;
-      added = true;
-      return {
-        activities: [
-          ...s.activities,
-          {
-            id: newId,
-            name: "",
-            durationMinutes: null,
-            doneByDay: emptyDoneByDay(),
-          },
-        ],
-      };
-    });
-    return added ? newId : null;
-  },
-  removeActivity: (id) =>
-    set((s) => ({
-      activities: s.activities.filter((a) => a.id !== id),
-    })),
-  setActivityName: (id, name) =>
-    set((s) => ({
-      activities: s.activities.map((a) => {
-        if (a.id !== id) return a;
-        if (!name.trim()) {
-          return { ...a, name, doneByDay: emptyDoneByDay() };
+export const useWeeklyGridStore = create<WeeklyGridState>()(
+  persist(
+    (set) => ({
+      themeId: DEFAULT_THEME_ID,
+      setTheme: (themeId: ThemeId) => {
+        set({ themeId });
+        if (typeof document !== "undefined") {
+          document.documentElement.dataset.theme = themeId;
         }
-        return { ...a, name };
-      }),
-    })),
-  setActivityDuration: (id, durationMinutes) =>
-    set((s) => ({
-      activities: s.activities.map((a) =>
-        a.id === id ? { ...a, durationMinutes } : a,
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
+        }
+      },
+      activities: [],
+      addActivity: () => {
+        const newId = crypto.randomUUID();
+        let added = false;
+        set((s) => {
+          if (s.activities.some((a) => !hasActivityName(a))) return s;
+          added = true;
+          return {
+            activities: [
+              ...s.activities,
+              {
+                id: newId,
+                name: "",
+                durationMinutes: null,
+                doneByDay: emptyDoneByDay(),
+              },
+            ],
+          };
+        });
+        return added ? newId : null;
+      },
+      removeActivity: (id) =>
+        set((s) => ({
+          activities: s.activities.filter((a) => a.id !== id),
+        })),
+      setActivityName: (id, name) =>
+        set((s) => ({
+          activities: s.activities.map((a) => {
+            if (a.id !== id) return a;
+            if (!name.trim()) {
+              return { ...a, name, doneByDay: emptyDoneByDay() };
+            }
+            return { ...a, name };
+          }),
+        })),
+      setActivityDuration: (id, durationMinutes) =>
+        set((s) => ({
+          activities: s.activities.map((a) =>
+            a.id === id ? { ...a, durationMinutes } : a,
+          ),
+        })),
+      toggleDayCompletion: (id, day) =>
+        set((s) => ({
+          activities: s.activities.map((a) => {
+            if (a.id !== id) return a;
+            if (!isActivityComplete(a)) return a;
+            return {
+              ...a,
+              doneByDay: { ...a.doneByDay, [day]: !a.doneByDay[day] },
+            };
+          }),
+        })),
+    }),
+    {
+      name: WEEKLY_COMMIT_PERSIST_KEY,
+      storage: createJSONStorage(() =>
+        typeof window !== "undefined" ? weeklyCommitInnerStorage() : noopStorage,
       ),
-    })),
-  toggleDayCompletion: (id, day) =>
-    set((s) => ({
-      activities: s.activities.map((a) => {
-        if (a.id !== id) return a;
-        if (!isActivityComplete(a)) return a;
-        return {
-          ...a,
-          doneByDay: { ...a.doneByDay, [day]: !a.doneByDay[day] },
-        };
+      partialize: (s) => ({
+        activities: s.activities,
+        themeId: s.themeId,
       }),
-    })),
-}));
+      onRehydrateStorage: () => (state, error) => {
+        if (error || !state) return;
+        if (typeof document !== "undefined") {
+          document.documentElement.dataset.theme = state.themeId;
+        }
+      },
+    },
+  ),
+);
+
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (e) => {
+    if (e.key === WEEKLY_COMMIT_PERSIST_KEY && e.newValue != null) {
+      void useWeeklyGridStore.persist.rehydrate();
+    }
+  });
+}
