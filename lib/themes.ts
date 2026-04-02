@@ -2,7 +2,11 @@
  * Theme ids match `data-theme` on `<html>` and a `[data-theme="…"]` block in
  * `app/globals.css`.
  */
-export const THEME_IDS = ["paper-planner", "graphite"] as const;
+export const THEME_IDS = [
+  "paper-planner",
+  "graphite",
+  "botanical-flow",
+] as const;
 
 export type ThemeId = (typeof THEME_IDS)[number];
 
@@ -13,6 +17,7 @@ export const THEME_STORAGE_KEY = "weekly-commit-theme";
 export const THEME_OPTIONS: { id: ThemeId; label: string }[] = [
   { id: "paper-planner", label: "Paper planner" },
   { id: "graphite", label: "Graphite" },
+  { id: "botanical-flow", label: "Botanical flow" },
 ];
 
 function isThemeId(value: string): value is ThemeId {

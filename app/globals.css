@@ -19,7 +19,13 @@
   }
 }
 
-/* ─── Theme: paper planner (warm paper + dusty rose panels, taupe ink) ─── */
+/* Shared layout tokens (radius 0 unless a theme sets --wc-radius-*) */
+html[data-theme] {
+  --wc-radius-table: 0;
+  --wc-radius-ui: 0;
+}
+
+/* ─── Theme: paper planner ─── */
 html[data-theme="paper-planner"] {
   color-scheme: light;
   --theme-page: #f9ebe3;
@@ -28,15 +34,20 @@ html[data-theme="paper-planner"] {
   --theme-border: #7a665a;
   --theme-input-bg: #fffef8;
   --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
+  --theme-accent: var(--theme-ink);
+  --wc-font-title: var(--font-theme-script), cursive;
+  --wc-font-subtitle: var(--font-theme-serif), Georgia, serif;
+  --wc-font-table: var(--font-theme-serif), Georgia, serif;
+  --wc-font-ui: var(--font-theme-serif), Georgia, "Times New Roman", serif;
 }
 
 html[data-theme="paper-planner"] body {
   background-color: var(--theme-page);
   color: var(--theme-ink);
-  font-family: var(--font-theme-serif), Georgia, "Times New Roman", serif;
+  font-family: var(--wc-font-ui);
 }
 
-/* ─── Theme: graphite (cool neutral, sans body) ─── */
+/* ─── Theme: graphite ─── */
 html[data-theme="graphite"] {
   color-scheme: light;
   --theme-page: #f4f4f2;
@@ -45,12 +56,42 @@ html[data-theme="graphite"] {
   --theme-border: #4a4a46;
   --theme-input-bg: #ffffff;
   --theme-hover: color-mix(in srgb, var(--theme-ink) 9%, transparent);
+  --theme-accent: var(--theme-ink);
+  --wc-font-title: var(--font-geist-sans), system-ui, sans-serif;
+  --wc-font-subtitle: var(--font-geist-sans), system-ui, sans-serif;
+  --wc-font-table: var(--font-geist-sans), system-ui, sans-serif;
+  --wc-font-ui: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 html[data-theme="graphite"] body {
   background-color: var(--theme-page);
   color: var(--theme-ink);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--wc-font-ui);
+}
+
+/* ─── Theme: botanical flow (cream, cocoa ink, terracotta + sage accents) ─── */
+html[data-theme="botanical-flow"] {
+  color-scheme: light;
+  --theme-page: #fdf8f1;
+  --theme-panel: #f3ece4;
+  --theme-ink: #5d4037;
+  --theme-border: #5d4037;
+  --theme-input-bg: #fffdf8;
+  --theme-hover: color-mix(in srgb, var(--theme-ink) 7%, transparent);
+  --theme-accent: #b5745e;
+  --theme-sage: #8f9779;
+  --wc-font-title: var(--font-flow-sniglet), system-ui, sans-serif;
+  --wc-font-subtitle: var(--font-flow-caveat), cursive;
+  --wc-font-table: var(--font-flow-kalam), cursive;
+  --wc-font-ui: var(--font-flow-patrick), "Segoe Print", "Comic Sans MS", cursive;
+  --wc-radius-table: 16px;
+  --wc-radius-ui: 12px;
+}
+
+html[data-theme="botanical-flow"] body {
+  background-color: var(--theme-page);
+  color: var(--theme-ink);
+  font-family: var(--wc-font-ui);
 }
 
 @layer components {
@@ -60,6 +101,8 @@ html[data-theme="graphite"] body {
     font-size: 0.875rem;
     line-height: 1.35;
     border: 1px solid var(--theme-border);
+    border-radius: var(--wc-radius-table);
+    overflow: hidden;
     background: var(--theme-page);
   }
 
@@ -68,7 +111,7 @@ html[data-theme="graphite"] body {
     padding: 0.5rem 0.625rem;
     background: var(--theme-panel);
     color: var(--theme-ink);
-    font-family: var(--font-theme-serif), Georgia, serif;
+    font-family: var(--wc-font-table);
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -104,7 +147,7 @@ html[data-theme="graphite"] body {
     color: var(--theme-ink);
     padding: 0.375rem 0.75rem;
     font-size: 0.875rem;
-    border-radius: 0;
+    border-radius: var(--wc-radius-ui);
     transition: background-color 0.15s ease;
   }
 
@@ -121,7 +164,7 @@ html[data-theme="graphite"] body {
     min-width: 0;
     flex: 1 1 0%;
     border: 1px solid var(--theme-border);
-    border-radius: 0;
+    border-radius: var(--wc-radius-ui);
     background: var(--theme-input-bg);
     color: var(--theme-ink);
     padding: 0.2rem 0.45rem;
@@ -137,7 +180,7 @@ html[data-theme="graphite"] body {
   .wc-select {
     width: 100%;
     border: 1px solid var(--theme-border);
-    border-radius: 0;
+    border-radius: var(--wc-radius-ui);
     background: var(--theme-input-bg);
     color: var(--theme-ink);
     padding: 0.2rem 0.35rem;
@@ -149,7 +192,7 @@ html[data-theme="graphite"] body {
     flex: 1 1 0%;
     cursor: text;
     border: 1px solid transparent;
-    border-radius: 0;
+    border-radius: var(--wc-radius-ui);
     background: transparent;
     color: inherit;
     text-align: left;
@@ -170,7 +213,7 @@ html[data-theme="graphite"] body {
     flex-shrink: 0;
     cursor: pointer;
     border: 1px solid var(--theme-border);
-    border-radius: 0;
+    border-radius: var(--wc-radius-ui);
     background: var(--theme-page);
     color: var(--theme-ink);
     padding: 0.15rem 0.5rem;
@@ -185,19 +228,19 @@ html[data-theme="graphite"] body {
   }
 
   .wc-checkbox {
-    accent-color: var(--theme-ink);
+    accent-color: var(--theme-accent, var(--theme-ink));
     width: 1rem;
     height: 1rem;
   }
 
   .wc-title-script {
-    font-family: var(--font-theme-script), cursive;
+    font-family: var(--wc-font-title);
     color: var(--theme-ink);
     line-height: 1.2;
   }
 
   .wc-title-sub {
-    font-family: var(--font-theme-serif), Georgia, serif;
+    font-family: var(--wc-font-subtitle);
     color: color-mix(in srgb, var(--theme-ink) 78%, transparent);
   }
 
@@ -206,13 +249,50 @@ html[data-theme="graphite"] body {
   }
 }
 
-/* After @layer so these win over .wc-th / .wc-title-sub in components layer */
-html[data-theme="graphite"] .wc-th {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+html[data-theme="botanical-flow"] .wc-title-script {
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
-html[data-theme="graphite"] .wc-title-sub {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+html[data-theme="botanical-flow"] .wc-th {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+html[data-theme="botanical-flow"] .wc-btn:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--theme-sage) 18%, var(--theme-page));
+}
+
+/*
+ * Rounded table + collapse + overflow:hidden hides internal grid lines in
+ * WebKit/Blink. Use separated borders with a right/bottom grid for botanical.
+ */
+html[data-theme="botanical-flow"] .wc-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+html[data-theme="botanical-flow"] .wc-th,
+html[data-theme="botanical-flow"] .wc-td {
+  border-style: solid;
+  border-color: var(--theme-border);
+  border-width: 0 1px 1px 0;
+}
+
+html[data-theme="botanical-flow"] thead .wc-th {
+  border-top-width: 0;
+}
+
+html[data-theme="botanical-flow"] .wc-th:last-child,
+html[data-theme="botanical-flow"] .wc-td:last-child {
+  border-right-width: 0;
+}
+
+html[data-theme="botanical-flow"] tfoot .wc-th,
+html[data-theme="botanical-flow"] tfoot .wc-td {
+  border-bottom-width: 0;
 }
 
 html:not([data-theme]) body {

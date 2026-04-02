@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import {
+  Caveat,
   Dancing_Script,
   Geist,
   Geist_Mono,
+  Kalam,
+  Patrick_Hand,
   Playfair_Display,
+  Sniglet,
 } from "next/font/google";
 import "./globals.css";
 
@@ -31,6 +35,30 @@ const dancingScript = Dancing_Script({
   weight: "400",
 });
 
+const sniglet = Sniglet({
+  variable: "--font-flow-sniglet",
+  subsets: ["latin"],
+  weight: ["400", "800"],
+});
+
+const caveat = Caveat({
+  variable: "--font-flow-caveat",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+});
+
+const kalam = Kalam({
+  variable: "--font-flow-kalam",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const patrickHand = Patrick_Hand({
+  variable: "--font-flow-patrick",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata: Metadata = {
   title: "Weekly Commit",
   description: "Achieve your goals one week at a time",
@@ -46,7 +74,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-theme={DEFAULT_THEME_ID}
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dancingScript.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dancingScript.variable} ${sniglet.variable} ${caveat.variable} ${kalam.variable} ${patrickHand.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <script
