@@ -173,8 +173,19 @@ html[data-theme="botanical-flow"] body {
   }
 
   .wc-input:focus-visible {
-    outline: 2px solid color-mix(in srgb, var(--theme-ink) 38%, transparent);
-    outline-offset: 1px;
+    outline: none;
+  }
+
+  /* Inside table cells: no inner border — grid line is the cell edge */
+  .wc-td .wc-input,
+  .wc-td .wc-select {
+    border-width: 0;
+    box-shadow: none;
+  }
+
+  .wc-td .wc-input:focus-visible,
+  .wc-td .wc-select:focus-visible {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
   }
 
   .wc-select {
@@ -185,6 +196,11 @@ html[data-theme="botanical-flow"] body {
     color: var(--theme-ink);
     padding: 0.2rem 0.35rem;
     font: inherit;
+  }
+
+  .wc-select:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
   }
 
   .wc-goal-button {

@@ -62,9 +62,8 @@ export function ThemeSelector() {
       {open ? (
         <div
           id="theme-picker"
-          className="absolute end-0 top-full z-20 mt-2 min-w-[12.5rem] border border-solid p-2 shadow-none"
+          className="absolute end-0 top-full z-20 mt-2 min-w-[12.5rem] p-1 shadow-none"
           style={{
-            borderColor: "var(--theme-border)",
             background: "var(--theme-page)",
             borderRadius: "var(--wc-radius-ui)",
           }}
