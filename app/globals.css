@@ -275,6 +275,32 @@ html[data-theme="botanical-flow"] body {
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
   }
 
+  .wc-duration-trigger {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--wc-radius-ui);
+    background: color-mix(in srgb, var(--theme-panel) 24%, var(--theme-page));
+    color: var(--theme-ink);
+    padding: 0.2rem 0.35rem;
+    font: inherit;
+    outline: none;
+    text-align: left;
+  }
+
+  .wc-duration-trigger--placeholder {
+    color: color-mix(in srgb, var(--theme-ink) 52%, transparent);
+  }
+
+  .wc-duration-trigger:focus-visible {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+  }
+
+  .wc-menu-popover {
+    box-shadow: 0 0.35rem 1.25rem color-mix(in srgb, var(--theme-ink) 18%, transparent);
+  }
+
   .wc-goal-button {
     min-width: 0;
     flex: 1 1 0%;

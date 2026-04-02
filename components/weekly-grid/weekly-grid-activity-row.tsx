@@ -3,12 +3,9 @@
 import { Trash2 } from "lucide-react";
 import { useId, useRef } from "react";
 
-import {
-  DAY_IDS,
-  DAY_LABELS,
-  DURATION_OPTIONS,
-  type DurationMinutes,
-} from "@/lib/weekly-grid/constants";
+import { DurationPicker } from "@/components/weekly-grid/duration-picker";
+import { DAY_IDS, DAY_LABELS } from "@/lib/weekly-grid/constants";
+import type { DurationMinutes } from "@/lib/weekly-grid/constants";
 import { formatMinutes } from "@/lib/weekly-grid/format-minutes";
 import { rowTotal } from "@/lib/weekly-grid/totals";
 import {
@@ -130,25 +127,10 @@ export function WeeklyGridActivityRow({
         </div>
       </td>
       <td className="wc-td">
-        <select
-          className="wc-select"
-          value={activity.durationMinutes ?? ""}
-          onChange={(e) => {
-            const raw = e.target.value;
-            if (raw === "") return;
-            onDurationChange(activity.id, Number(raw) as DurationMinutes);
-          }}
-          aria-label="Duration per session"
-        >
-          <option value="" disabled>
-            Select duration
-          </option>
-          {DURATION_OPTIONS.map((opt) => (
-            <option key={opt.minutes} value={opt.minutes}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <DurationPicker
+          value={activity.durationMinutes}
+          onChange={(minutes) => onDurationChange(activity.id, minutes)}
+        />
       </td>
       {DAY_IDS.map((day) => (
         <td key={day} className="wc-td wc-td-day text-center">
