@@ -8,6 +8,7 @@ import {
 } from "@/lib/weekly-grid/constants";
 import { useWeeklyGridStore } from "@/lib/weekly-grid/store";
 import { columnTotals, grandTotal, rowTotal } from "@/lib/weekly-grid/totals";
+import { isActivityComplete } from "@/lib/weekly-grid/types";
 
 function formatMinutes(total: number): string {
   if (total === 0) return "0";
@@ -30,6 +31,7 @@ export function WeeklyGrid() {
   const weekTotal = grandTotal(activities);
 
   const colCount = 2 + DAY_IDS.length + 1;
+  const canAddActivity = activities.every(isActivityComplete);
 
   return (
     <table className="w-full border-collapse border border-zinc-400 text-sm">
@@ -81,15 +83,20 @@ export function WeeklyGrid() {
               <td className="border border-zinc-400 p-1 align-middle">
                 <select
                   className="w-full rounded border border-zinc-300 px-1 py-0.5"
-                  value={activity.durationMinutes}
-                  onChange={(e) =>
+                  value={activity.durationMinutes ?? ""}
+                  onChange={(e) => {
+                    const raw = e.target.value;
+                    if (raw === "") return;
                     setActivityDuration(
                       activity.id,
-                      Number(e.target.value) as DurationMinutes,
-                    )
-                  }
+                      Number(raw) as DurationMinutes,
+                    );
+                  }}
                   aria-label="Duration per session"
                 >
+                  <option value="" disabled>
+                    Select duration
+                  </option>
                   {DURATION_OPTIONS.map((opt) => (
                     <option key={opt.minutes} value={opt.minutes}>
                       {opt.label}
@@ -105,8 +112,14 @@ export function WeeklyGrid() {
                   <input
                     type="checkbox"
                     checked={activity.doneByDay[day]}
+                    disabled={!isActivityComplete(activity)}
                     onChange={() => toggleDayCompletion(activity.id, day)}
                     aria-label={`${DAY_LABELS[day]} completed`}
+                    title={
+                      isActivityComplete(activity)
+                        ? undefined
+                        : "Set a goal name and duration first"
+                    }
                   />
                 </td>
               ))}
@@ -120,8 +133,14 @@ export function WeeklyGrid() {
           <td colSpan={colCount} className="border border-zinc-400 p-2">
             <button
               type="button"
-              className="rounded border border-zinc-400 px-2 py-1 text-sm"
+              className="rounded border border-zinc-400 px-2 py-1 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={!canAddActivity}
               onClick={() => addActivity()}
+              title={
+                canAddActivity
+                  ? undefined
+                  : "Complete goal name and duration on every row first"
+              }
             >
               Add activity
             </button>

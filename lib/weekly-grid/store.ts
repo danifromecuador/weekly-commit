@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 import { DAY_IDS, type DurationMinutes } from "./constants";
-import type { ActivityRow, DayId } from "./types";
+import { type ActivityRow, type DayId, isActivityComplete } from "./types";
 
 function emptyDoneByDay(): Record<DayId, boolean> {
   return Object.fromEntries(
@@ -21,26 +21,33 @@ type WeeklyGridState = {
 export const useWeeklyGridStore = create<WeeklyGridState>((set) => ({
   activities: [],
   addActivity: () =>
-    set((s) => ({
-      activities: [
-        ...s.activities,
-        {
-          id: crypto.randomUUID(),
-          name: "",
-          durationMinutes: 60,
-          doneByDay: emptyDoneByDay(),
-        },
-      ],
-    })),
+    set((s) => {
+      if (s.activities.some((a) => !isActivityComplete(a))) return s;
+      return {
+        activities: [
+          ...s.activities,
+          {
+            id: crypto.randomUUID(),
+            name: "",
+            durationMinutes: null,
+            doneByDay: emptyDoneByDay(),
+          },
+        ],
+      };
+    }),
   removeActivity: (id) =>
     set((s) => ({
       activities: s.activities.filter((a) => a.id !== id),
     })),
   setActivityName: (id, name) =>
     set((s) => ({
-      activities: s.activities.map((a) =>
-        a.id === id ? { ...a, name } : a,
-      ),
+      activities: s.activities.map((a) => {
+        if (a.id !== id) return a;
+        if (!name.trim()) {
+          return { ...a, name, doneByDay: emptyDoneByDay() };
+        }
+        return { ...a, name };
+      }),
     })),
   setActivityDuration: (id, durationMinutes) =>
     set((s) => ({
@@ -52,6 +59,7 @@ export const useWeeklyGridStore = create<WeeklyGridState>((set) => ({
     set((s) => ({
       activities: s.activities.map((a) => {
         if (a.id !== id) return a;
+        if (!isActivityComplete(a)) return a;
         return {
           ...a,
           doneByDay: { ...a.doneByDay, [day]: !a.doneByDay[day] },

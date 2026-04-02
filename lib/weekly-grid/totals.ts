@@ -8,9 +8,8 @@ function dayTotalForActivities(
 ): number {
   let sum = 0;
   for (const activity of activities) {
-    if (activity.doneByDay[day]) {
-      sum += activity.durationMinutes;
-    }
+    if (!activity.doneByDay[day] || activity.durationMinutes == null) continue;
+    sum += activity.durationMinutes;
   }
   return sum;
 }
@@ -26,6 +25,7 @@ export function columnTotals(
 
 /** Completed minutes for one activity across the week (duration × checked days). */
 export function rowTotal(activity: ActivityRow): number {
+  if (activity.durationMinutes == null) return 0;
   const checkedDays = DAY_IDS.filter((day) => activity.doneByDay[day]).length;
   return activity.durationMinutes * checkedDays;
 }
