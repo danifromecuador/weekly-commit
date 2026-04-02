@@ -64,6 +64,11 @@ export const metadata: Metadata = {
   description: "Achieve your goals one week at a time",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

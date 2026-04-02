@@ -70,7 +70,7 @@ export function ThemeSelector() {
           role="listbox"
           aria-label="Choose color theme"
           aria-activedescendant={`theme-option-${theme}`}
-          className="wc-theme-menu absolute end-0 top-full z-20 mt-2"
+          className="wc-theme-menu absolute start-1/2 top-full z-20 mt-2 min-w-[min(12.5rem,calc(100vw-2rem))] -translate-x-1/2 sm:start-auto sm:end-0 sm:translate-x-0"
         >
           {THEME_OPTIONS.map((t) => (
             <li key={t.id} role="presentation">

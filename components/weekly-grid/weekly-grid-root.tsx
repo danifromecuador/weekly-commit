@@ -22,7 +22,8 @@ export function WeeklyGridRoot() {
   } = useWeeklyGrid();
 
   return (
-    <table className="wc-table">
+    <div className="min-w-0 overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
+      <table className="wc-table min-w-[36rem]">
       <WeeklyGridHeader />
       <tbody>
         {activities.length === 0 ? (
@@ -66,5 +67,6 @@ export function WeeklyGridRoot() {
       </tbody>
       <WeeklyGridFooter colTotals={colTotals} weekTotal={weekTotal} />
     </table>
+    </div>
   );
 }
