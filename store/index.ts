@@ -17,7 +17,7 @@ import {
   persistedActivitiesOnly,
 } from "./slices/activities-slice";
 import { createThemeSlice } from "./slices/theme-slice";
-import { noopStorage, weeklyCommitInnerStorage } from "./storage";
+import { noopStorage } from "./storage";
 import type { WeeklyCommitState } from "./types";
 
 export type { WeeklyCommitState } from "./types";
@@ -31,7 +31,7 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
     {
       name: WEEKLY_COMMIT_PERSIST_KEY,
       storage: createJSONStorage(() =>
-        typeof window !== "undefined" ? weeklyCommitInnerStorage() : noopStorage,
+        typeof window !== "undefined" ? window.localStorage : noopStorage,
       ),
       partialize: (s) => ({
         activities: persistedActivitiesOnly(s.activities),
