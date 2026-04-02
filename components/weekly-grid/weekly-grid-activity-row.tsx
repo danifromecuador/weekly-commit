@@ -46,9 +46,9 @@ export function WeeklyGridActivityRow({
     (!activity.name.trim() && editingActivityId !== activity.id);
 
   return (
-    <tr className="group">
+    <tr>
       <td className="wc-td">
-        <div className="flex items-center gap-1">
+        <div className="group flex items-center gap-1">
           {showNameInput ? (
             <input
               className="wc-input"
