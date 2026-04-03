@@ -73,7 +73,7 @@ describe("rowTotal", () => {
     const d = emptyDoneByDay();
     d.mon = true;
     d.tue = true;
-    expect(rowTotal(act({ durationMinutes: 20, doneByDay: d }))).toBe(40);
+    expect(rowTotal(act({ durationMinutes: 30, doneByDay: d }))).toBe(60);
   });
 
   it("is 0 when duration is null", () => {
@@ -92,9 +92,9 @@ describe("grandTotal", () => {
     d2.tue = true;
     expect(
       grandTotal([
-        act({ id: "1", durationMinutes: 10, doneByDay: d1 }),
-        act({ id: "2", durationMinutes: 5, doneByDay: d2 }),
+        act({ id: "1", durationMinutes: 15, doneByDay: d1 }),
+        act({ id: "2", durationMinutes: 30, doneByDay: d2 }),
       ]),
-    ).toBe(10 + 5 * 2);
+    ).toBe(15 + 30 * 2);
   });
 });

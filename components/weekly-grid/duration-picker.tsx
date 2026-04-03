@@ -2,7 +2,14 @@
 
 import { ChevronDown } from "lucide-react";
 import { createPortal } from "react-dom";
-import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 
 import { getMessages } from "@/lib/messages";
 import {
@@ -20,15 +27,16 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
   const locale = useWeeklyGridStore((s) => s.locale);
   const m = getMessages(locale);
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const menuId = useId();
   const [menuPos, setMenuPos] = useState({ top: 0, left: 0, minWidth: 0 });
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const canUseDom = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const selectedLabel =
     value == null
@@ -73,7 +81,7 @@ export function DurationPicker({ value, onChange }: DurationPickerProps) {
   };
 
   const menu =
-    open && mounted ? (
+    open && canUseDom ? (
       <ul
         ref={menuRef}
         id={menuId}

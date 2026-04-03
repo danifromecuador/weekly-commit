@@ -15,7 +15,10 @@ export type WeeklyCommitState = {
   addActivity: () => string | null;
   removeActivity: (id: string) => void;
   setActivityName: (id: string, name: string) => void;
-  setActivityDuration: (id: string, durationMinutes: DurationMinutes) => void;
+  setActivityDuration: (
+    id: string,
+    durationMinutes: DurationMinutes | null,
+  ) => void;
   toggleDayCompletion: (id: string, day: DayId) => void;
   /** Reorders rows by id only; does not change row fields. */
   reorderActivities: (activeId: string, overId: string) => void;
