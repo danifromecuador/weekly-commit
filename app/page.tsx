@@ -3,6 +3,7 @@
 import { AppearanceToggle } from "@/components/appearance-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeSelector } from "@/components/theme-selector";
+import { SiteFooter } from "@/components/site-footer";
 import { WeeklyGrid } from "@/components/WeeklyGrid";
 import { getMessages } from "@/lib/messages";
 import { useWeeklyGridStore } from "@/store";
@@ -29,6 +30,7 @@ export default function Page() {
       <div className="flex min-w-0 flex-1 flex-col">
         <WeeklyGrid />
       </div>
+      <SiteFooter />
     </main>
   );
 }

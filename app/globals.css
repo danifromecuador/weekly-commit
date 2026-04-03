@@ -546,6 +546,27 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
     color: color-mix(in srgb, var(--theme-ink) 48%, transparent);
   }
 
+  .wc-site-footer {
+    border-top: 1px solid color-mix(in srgb, var(--theme-border) 42%, transparent);
+  }
+
+  .wc-footer-link {
+    color: var(--theme-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    transition: color 0.12s ease, filter 0.12s ease;
+  }
+
+  .wc-footer-link:hover {
+    filter: brightness(1.12);
+  }
+
+  .wc-footer-link:focus-visible {
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-accent) 42%, transparent);
+  }
+
   .wc-dialog {
     margin: auto;
     max-width: min(20rem, calc(100vw - 2rem));

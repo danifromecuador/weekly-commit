@@ -43,6 +43,15 @@ type Messages = {
   };
   dayLabels: Record<DayId, string>;
   dayInitials: Record<DayId, string>;
+  footer: {
+    by: string;
+    streaks: string;
+    plannywise: string;
+    linkedInAria: string;
+    streaksAria: string;
+    plannywiseAria: string;
+    relatedAppsNavAria: string;
+  };
 };
 
 const EN_MESSAGES: Messages = {
@@ -98,6 +107,15 @@ const EN_MESSAGES: Messages = {
     fri: "F",
     sat: "S",
   },
+  footer: {
+    by: "By",
+    streaks: "Streaks",
+    plannywise: "Plannywise",
+    linkedInAria: "Dani Dev on LinkedIn",
+    streaksAria: "Streaks — open productivity app",
+    plannywiseAria: "Plannywise — open productivity app",
+    relatedAppsNavAria: "More productivity apps by Dani Dev",
+  },
 };
 
 const ES_MESSAGES: Messages = {
@@ -152,6 +170,15 @@ const ES_MESSAGES: Messages = {
     thu: "J",
     fri: "V",
     sat: "S",
+  },
+  footer: {
+    by: "Por",
+    streaks: "Streaks",
+    plannywise: "Plannywise",
+    linkedInAria: "Dani Dev en LinkedIn",
+    streaksAria: "Streaks — abrir app de productividad",
+    plannywiseAria: "Plannywise — abrir app de productividad",
+    relatedAppsNavAria: "Más apps de productividad de Dani Dev",
   },
 };
 
