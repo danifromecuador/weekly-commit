@@ -67,7 +67,7 @@ export function WeeklyGridRoot() {
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis]}
       >
-      <table className="wc-table min-w-[60rem]">
+      <table className="wc-table wc-weekly-grid-table">
         <colgroup>
           <col className="wc-col-goal" />
           <col className="wc-col-duration" />

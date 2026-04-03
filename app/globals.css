@@ -781,3 +781,15 @@ html:not([data-theme]) body {
     width: 4.25rem;
   }
 }
+
+/* Let the grid shrink on narrow viewports; keep a wide floor on desktop */
+.wc-weekly-grid-table {
+  min-width: 60rem;
+}
+
+@media (max-width: 1024px) {
+  .wc-weekly-grid-table {
+    min-width: 0;
+    width: 100%;
+  }
+}
