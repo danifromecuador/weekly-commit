@@ -6,12 +6,14 @@ App to plan weekly goals with a Monday-to-Saturday grid, activity duration contr
 
 - Weekly per-activity grid with completed-day checkboxes.
 - Preset durations and totals per row, per day, and per week.
-- Themes (`paper-planner`, `graphite`, `botanical-flow`) and light/dark mode.
-- Persistence in `localStorage` (theme, appearance, and valid activities).
+- Reorder goals by dragging from the **Goal** column handle (order is persisted with activities in `localStorage`; handle is hidden until hover on fine pointers).
+- Empty grid: one row with a short message and an **Add** button; the icon-only add row appears once there is at least one activity.
+- Themes (`paper-planner`, `graphite`, `botanical-flow`) and light/dark mode, with **distinct dark palettes** per theme (warm / cool slate / green earth).
+- Persistence in `localStorage` (theme, appearance, locale, and valid activities—including row order).
 - Test suite with **Vitest + Testing Library**:
-  - 11 test files
-  - 57 passing tests
-  - coverage for nominal and edge cases (invalid parsing, SSR/no `window`, persisted-state merge, non-persistable drafts, etc.)
+  - 18 test files
+  - 77 passing tests
+  - coverage for nominal and edge cases (invalid parsing, SSR/no `window`, persisted-state merge, non-persistable drafts, empty grid UI, `reorderActivities`, etc.)
 
 ## Stack
 
@@ -20,6 +22,7 @@ App to plan weekly goals with a Monday-to-Saturday grid, activity duration contr
 - TypeScript
 - Tailwind CSS 4
 - Zustand
+- @dnd-kit (sortable drag-and-drop)
 - Vitest + Testing Library
 
 ## Quickstart
