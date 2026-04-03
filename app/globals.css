@@ -720,6 +720,25 @@ html:not([data-theme]) body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Narrow viewports (phones landscape, small tablets, portrait): tighter day columns */
+@media (max-width: 1024px) {
+  .wc-col-day {
+    width: 2.625rem;
+  }
+
+  .wc-col-duration {
+    width: 6rem;
+  }
+
+  .wc-col-total {
+    width: 4.75rem;
+  }
+
+  .wc-day-toggle {
+    min-height: 2.5rem;
+  }
+}
+
 @media (max-width: 639px) {
   .wc-table {
     font-size: 0.8125rem;
@@ -736,10 +755,29 @@ html:not([data-theme]) body {
   }
 
   .wc-day-toggle {
-    padding: 0.3rem 0.35rem;
+    padding: 0.2rem 0.15rem;
+    min-height: 2.25rem;
+  }
+
+  .wc-day-toggle-check {
+    width: 1rem;
+    height: 1rem;
   }
 
   .wc-td-muted {
     padding: 0.75rem 0.85rem;
+  }
+
+  /* Minimum day column width: single-letter headers + compact tap targets */
+  .wc-col-day {
+    width: 2rem;
+  }
+
+  .wc-col-duration {
+    width: 5.25rem;
+  }
+
+  .wc-col-total {
+    width: 4.25rem;
   }
 }
