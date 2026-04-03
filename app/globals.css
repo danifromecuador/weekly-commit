@@ -548,9 +548,17 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
 
   .wc-site-footer {
     border-top: 1px solid color-mix(in srgb, var(--theme-border) 42%, transparent);
+    font-family: var(--wc-font-ui);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.4;
   }
 
   .wc-footer-link {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
     color: var(--theme-accent);
     text-decoration: underline;
     text-underline-offset: 0.18em;

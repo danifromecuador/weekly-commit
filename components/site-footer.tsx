@@ -13,14 +13,14 @@ export function SiteFooter() {
 
   return (
     <footer className="wc-site-footer mt-10 pt-6 sm:mt-12">
-      <div className="flex flex-col items-center gap-3 text-center text-sm sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1 sm:gap-y-2">
+      <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1 sm:gap-y-2">
         <p className="wc-muted-ink m-0">
           <span>{m.footer.by} </span>
           <a
             href={LINKEDIN_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="wc-footer-link font-medium"
+            className="wc-footer-link"
             aria-label={m.footer.linkedInAria}
           >
             Dani Dev
