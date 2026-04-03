@@ -8,6 +8,12 @@ import { getThemeBootstrapScript } from "@/lib/themes";
 export const metadata: Metadata = {
   title: "Weekly Commit",
   description: "Achieve your goals one week at a time",
+  /** Single source: `app/icon.png`. Avoid a separate `favicon.ico` or browsers often prefer it and show the wrong asset. */
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export const viewport = {
