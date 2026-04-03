@@ -13,9 +13,9 @@ export function SiteFooter() {
 
   return (
     <footer className="wc-site-footer mt-10 pt-6 sm:mt-12">
-      <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1 sm:gap-y-2">
-        <p className="wc-muted-ink m-0">
-          <span>{m.footer.by} </span>
+      <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 sm:gap-y-2">
+        <p className="wc-muted-ink m-0 inline-flex flex-wrap items-center justify-center gap-x-1.5">
+          <span>{m.footer.by}</span>
           <a
             href={LINKEDIN_HREF}
             target="_blank"
@@ -26,7 +26,10 @@ export function SiteFooter() {
             Dani Dev
           </a>
         </p>
-        <span className="wc-footer-sep wc-muted-ink hidden select-none sm:inline" aria-hidden>
+        <span
+          className="wc-muted-ink hidden shrink-0 select-none sm:inline"
+          aria-hidden
+        >
           ·
         </span>
         <nav
@@ -42,7 +45,7 @@ export function SiteFooter() {
           >
             {m.footer.streaks}
           </a>
-          <span className="wc-muted-ink select-none" aria-hidden>
+          <span className="wc-muted-ink shrink-0 select-none" aria-hidden>
             ·
           </span>
           <a
