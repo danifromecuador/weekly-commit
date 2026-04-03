@@ -71,7 +71,7 @@ export function WeeklyGridActivityRow({
       className={sortable?.isDragging ? "wc-tr-sortable-dragging" : undefined}
     >
       <td className="wc-td">
-        <div className="group flex min-w-0 items-center gap-1">
+        <div className="wc-goal-cell-inner group flex min-w-0 items-center gap-1">
           {goalDragHandle ? (
             <button
               type="button"

@@ -400,6 +400,24 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
     padding: 0.2rem;
     line-height: 0;
     box-shadow: none;
+    opacity: 0;
+    transition:
+      opacity 0.15s ease,
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  @media (hover: hover) {
+    .wc-goal-cell-inner:hover .wc-drag-handle {
+      opacity: 1;
+    }
+  }
+
+  /* Touch / coarse pointers: no hover to reveal the handle */
+  @media (hover: none) {
+    .wc-drag-handle {
+      opacity: 1;
+    }
   }
 
   .wc-drag-handle:hover {
@@ -410,6 +428,11 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
   .wc-drag-handle:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+    opacity: 1;
+  }
+
+  .wc-table tbody tr.wc-tr-sortable-dragging .wc-drag-handle {
+    opacity: 1;
   }
 
   .wc-table tbody tr.wc-tr-sortable-dragging {
