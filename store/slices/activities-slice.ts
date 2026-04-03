@@ -1,6 +1,7 @@
+import { arrayMove } from "@dnd-kit/sortable";
 import type { StateCreator } from "zustand";
 
-import { DAY_IDS, type DurationMinutes } from "@/lib/weekly-grid/constants";
+import { DAY_IDS } from "@/lib/weekly-grid/constants";
 import {
   type ActivityRow,
   type DayId,
@@ -28,6 +29,7 @@ export type ActivitiesSlice = Pick<
   | "setActivityName"
   | "setActivityDuration"
   | "toggleDayCompletion"
+  | "reorderActivities"
 >;
 
 export const createActivitiesSlice: StateCreator<
@@ -88,4 +90,15 @@ export const createActivitiesSlice: StateCreator<
         };
       }),
     })),
+  reorderActivities: (activeId, overId) =>
+    set((s) => {
+      const oldIndex = s.activities.findIndex((a) => a.id === activeId);
+      const newIndex = s.activities.findIndex((a) => a.id === overId);
+      if (oldIndex === -1 || newIndex === -1 || oldIndex === newIndex) {
+        return s;
+      }
+      return {
+        activities: arrayMove(s.activities, oldIndex, newIndex),
+      };
+    }),
 });

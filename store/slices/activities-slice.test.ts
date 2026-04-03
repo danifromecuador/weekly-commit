@@ -120,4 +120,29 @@ describe("createActivitiesSlice actions", () => {
     useStore.getState().setActivityDuration("uuid-fixed-1", null);
     expect(useStore.getState().activities[0]!.durationMinutes).toBeNull();
   });
+
+  it("reorderActivities moves a row without mutating row data", () => {
+    useStore.getState().addActivity();
+    useStore.getState().setActivityName("uuid-fixed-1", "First");
+    vi.stubGlobal("crypto", { randomUUID: () => "uuid-fixed-2" });
+    useStore.getState().addActivity();
+    useStore.getState().setActivityName("uuid-fixed-2", "Second");
+    const beforeFirst = { ...useStore.getState().activities[0]! };
+    const beforeSecond = { ...useStore.getState().activities[1]! };
+    useStore.getState().reorderActivities("uuid-fixed-2", "uuid-fixed-1");
+    const rows = useStore.getState().activities;
+    expect(rows).toHaveLength(2);
+    expect(rows[0]!.id).toBe("uuid-fixed-2");
+    expect(rows[1]!.id).toBe("uuid-fixed-1");
+    expect(rows[0]).toEqual(beforeSecond);
+    expect(rows[1]).toEqual(beforeFirst);
+  });
+
+  it("reorderActivities is a no-op for unknown ids", () => {
+    useStore.getState().addActivity();
+    useStore.getState().setActivityName("uuid-fixed-1", "Only");
+    const before = useStore.getState().activities;
+    useStore.getState().reorderActivities("missing", "uuid-fixed-1");
+    expect(useStore.getState().activities).toBe(before);
+  });
 });

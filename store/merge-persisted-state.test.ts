@@ -21,6 +21,7 @@ function noopActions(): Pick<
   | "setActivityName"
   | "setActivityDuration"
   | "toggleDayCompletion"
+  | "reorderActivities"
 > {
   return {
     setTheme: () => {},
@@ -31,6 +32,7 @@ function noopActions(): Pick<
     setActivityName: () => {},
     setActivityDuration: () => {},
     toggleDayCompletion: () => {},
+    reorderActivities: () => {},
   };
 }
 
