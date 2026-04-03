@@ -35,6 +35,8 @@ type Messages = {
     completedSuffix: string;
     selectDuration: string;
     durationPerSession: string;
+    /** Drag handle in Goal column to reorder rows */
+    dragReorderGoal: string;
   };
   dayLabels: Record<DayId, string>;
   dayInitials: Record<DayId, string>;
@@ -74,6 +76,7 @@ const EN_MESSAGES: Messages = {
     completedSuffix: "completed",
     selectDuration: "Select",
     durationPerSession: "Duration per session",
+    dragReorderGoal: "Drag to reorder goal",
   },
   dayLabels: {
     mon: "Monday",
@@ -127,6 +130,7 @@ const ES_MESSAGES: Messages = {
     completedSuffix: "completado",
     selectDuration: "Elegir",
     durationPerSession: "Duración por sesión",
+    dragReorderGoal: "Arrastrar para reordenar la meta",
   },
   dayLabels: {
     mon: "Lunes",

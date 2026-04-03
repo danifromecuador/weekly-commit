@@ -1,7 +1,11 @@
 "use client";
 
-import { Check, Trash2 } from "lucide-react";
-import { useId, useRef } from "react";
+import type {
+  DraggableAttributes,
+  DraggableSyntheticListeners,
+} from "@dnd-kit/core";
+import { Check, GripVertical, Trash2 } from "lucide-react";
+import { useId, useRef, type CSSProperties } from "react";
 
 import { DurationPicker } from "@/components/weekly-grid/duration-picker";
 import { getMessages } from "@/lib/messages";
@@ -25,6 +29,15 @@ type WeeklyGridActivityRowProps = {
   onNameChange: (id: string, name: string) => void;
   onDurationChange: (id: string, durationMinutes: DurationMinutes) => void;
   onToggleDay: (id: string, day: DayId) => void;
+  sortable?: {
+    rowRef: (node: HTMLElement | null) => void;
+    rowStyle: CSSProperties;
+    isDragging: boolean;
+  };
+  goalDragHandle?: {
+    attributes: DraggableAttributes;
+    listeners: DraggableSyntheticListeners;
+  };
 };
 
 export function WeeklyGridActivityRow({
@@ -36,6 +49,8 @@ export function WeeklyGridActivityRow({
   onNameChange,
   onDurationChange,
   onToggleDay,
+  sortable,
+  goalDragHandle,
 }: WeeklyGridActivityRowProps) {
   const locale = useWeeklyGridStore((s) => s.locale);
   const m = getMessages(locale);
@@ -50,9 +65,25 @@ export function WeeklyGridActivityRow({
     (!activity.name.trim() && editingActivityId !== activity.id);
 
   return (
-    <tr>
+    <tr
+      ref={sortable?.rowRef}
+      style={sortable?.rowStyle}
+      className={sortable?.isDragging ? "wc-tr-sortable-dragging" : undefined}
+    >
       <td className="wc-td">
-        <div className="group flex items-center gap-1">
+        <div className="group flex min-w-0 items-center gap-1">
+          {goalDragHandle ? (
+            <button
+              type="button"
+              className="wc-drag-handle inline-flex shrink-0 cursor-grab items-center justify-center active:cursor-grabbing"
+              {...goalDragHandle.attributes}
+              {...goalDragHandle.listeners}
+              aria-label={m.grid.dragReorderGoal}
+              title={m.grid.dragReorderGoal}
+            >
+              <GripVertical className="size-3.5" strokeWidth={2} aria-hidden />
+            </button>
+          ) : null}
           {showNameInput ? (
             <input
               className="wc-input"
