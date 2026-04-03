@@ -391,6 +391,31 @@ html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
     box-shadow: none;
   }
 
+  .wc-drag-handle {
+    touch-action: none;
+    border: none;
+    border-radius: var(--wc-radius-ui);
+    background: transparent;
+    color: color-mix(in srgb, var(--theme-ink) 52%, transparent);
+    padding: 0.2rem;
+    line-height: 0;
+    box-shadow: none;
+  }
+
+  .wc-drag-handle:hover {
+    background: var(--theme-hover);
+    color: var(--theme-ink);
+  }
+
+  .wc-drag-handle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-ink) 35%, transparent);
+  }
+
+  .wc-table tbody tr.wc-tr-sortable-dragging {
+    opacity: 0.55;
+  }
+
   .wc-btn-delete {
     flex-shrink: 0;
     cursor: pointer;

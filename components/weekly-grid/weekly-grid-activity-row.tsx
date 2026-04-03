@@ -76,8 +76,8 @@ export function WeeklyGridActivityRow({
             <button
               type="button"
               className="wc-drag-handle inline-flex shrink-0 cursor-grab items-center justify-center active:cursor-grabbing"
-              {...goalDragHandle.attributes}
               {...goalDragHandle.listeners}
+              {...goalDragHandle.attributes}
               aria-label={m.grid.dragReorderGoal}
               title={m.grid.dragReorderGoal}
             >
