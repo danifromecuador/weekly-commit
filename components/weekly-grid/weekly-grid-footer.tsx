@@ -24,7 +24,7 @@ export function WeeklyGridFooter({
     <tfoot>
       <tr>
         <th className="wc-th text-left" scope="row">
-          {m.grid.totals}
+          {m.grid.total}
         </th>
         <td className="wc-td wc-td-panel wc-num">
           {formatMinutes(durationColumnTotal)}

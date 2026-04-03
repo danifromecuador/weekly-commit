@@ -20,7 +20,6 @@ type Messages = {
     timeShort: string;
     duration: string;
     total: string;
-    totals: string;
     /** Empty grid: short line before the add CTA */
     noActivities: string;
     /** Empty grid: label on the primary add button */
@@ -73,7 +72,6 @@ const EN_MESSAGES: Messages = {
     timeShort: "Time",
     duration: "Duration",
     total: "Total",
-    totals: "Totals",
     noActivities: "No activities yet.",
     addGoal: "Add",
     addActivity: "Add activity",
@@ -137,7 +135,6 @@ const ES_MESSAGES: Messages = {
     timeShort: "Tiempo",
     duration: "Duración",
     total: "Total",
-    totals: "Totales",
     noActivities: "Aún no hay actividades.",
     addGoal: "Agregar",
     addActivity: "Agregar actividad",
