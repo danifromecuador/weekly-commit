@@ -102,42 +102,47 @@ html[data-theme="botanical-flow"] body {
   font-family: var(--wc-font-ui);
 }
 
-/* ─── Dark: `data-appearance` on <html> (inline script) or on .wc-theme-root (React) ─── */
+/* ─── Dark: `data-appearance` on <html> (inline script) or on .wc-theme-root (React) ───
+   Each theme keeps a distinct hue in dark mode (warm rose / cool slate / green earth)
+   so they do not collapse into the same near-neutral black. */
 html[data-theme="paper-planner"][data-appearance="dark"],
 html[data-theme="paper-planner"]:has(.wc-theme-root[data-appearance="dark"]) {
   color-scheme: dark;
-  --theme-page: #1f1a17;
-  --theme-panel: #2f2824;
-  --theme-ink: #ede4dc;
-  --theme-border: #6b5d52;
-  --theme-input-bg: #161210;
-  --theme-hover: color-mix(in srgb, var(--theme-ink) 12%, transparent);
-  --theme-accent: #c4a990;
+  /* Warm umber page vs lifted dusty-rose panel */
+  --theme-page: #2a1e18;
+  --theme-panel: #3d2e26;
+  --theme-ink: #f8eee6;
+  --theme-border: #8f6e5c;
+  --theme-input-bg: #1c1511;
+  --theme-hover: color-mix(in srgb, #d4a574 22%, transparent);
+  --theme-accent: #e8c4a8;
 }
 
 html[data-theme="graphite"][data-appearance="dark"],
 html[data-theme="graphite"]:has(.wc-theme-root[data-appearance="dark"]) {
   color-scheme: dark;
-  --theme-page: #141413;
-  --theme-panel: #1f1f1d;
-  --theme-ink: #e8e8e4;
-  --theme-border: #4a4a46;
-  --theme-input-bg: #0c0c0b;
-  --theme-hover: color-mix(in srgb, var(--theme-ink) 10%, transparent);
-  --theme-accent: #c8c8c0;
+  /* Cool blue-slate (not brown) — contrasts with paper-planner warmth */
+  --theme-page: #13161c;
+  --theme-panel: #1e252e;
+  --theme-ink: #e8ecf4;
+  --theme-border: #4f5c6e;
+  --theme-input-bg: #0c0e12;
+  --theme-hover: color-mix(in srgb, #8fa3c0 18%, transparent);
+  --theme-accent: #9eb7d4;
 }
 
 html[data-theme="botanical-flow"][data-appearance="dark"],
 html[data-theme="botanical-flow"]:has(.wc-theme-root[data-appearance="dark"]) {
   color-scheme: dark;
-  --theme-page: #1a1512;
-  --theme-panel: #262019;
-  --theme-ink: #efe6dc;
-  --theme-border: #7a6355;
-  --theme-input-bg: #120f0c;
-  --theme-hover: color-mix(in srgb, var(--theme-ink) 8%, transparent);
-  --theme-accent: #d4917a;
-  --theme-sage: #9aaa8a;
+  /* Forest / sage wash — green-tinted neutrals vs terracotta accent */
+  --theme-page: #141c15;
+  --theme-panel: #263028;
+  --theme-ink: #eef4ea;
+  --theme-border: #5d7158;
+  --theme-input-bg: #0e140f;
+  --theme-hover: color-mix(in srgb, var(--theme-sage) 28%, transparent);
+  --theme-accent: #e89578;
+  --theme-sage: #8fb89a;
 }
 
 @layer components {
