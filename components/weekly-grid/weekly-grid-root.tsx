@@ -81,7 +81,17 @@ export function WeeklyGridRoot() {
         {activities.length === 0 ? (
           <tr>
             <td colSpan={colCount} className="wc-td wc-td-muted">
-              {m.grid.noActivities}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                <span>{m.grid.noActivities}</span>
+                <button
+                  type="button"
+                  className="wc-btn shrink-0"
+                  onClick={() => addActivity()}
+                  aria-label={m.grid.addActivity}
+                >
+                  {m.grid.addGoal}
+                </button>
+              </div>
             </td>
           </tr>
         ) : (
@@ -104,24 +114,26 @@ export function WeeklyGridRoot() {
             ))}
           </SortableContext>
         )}
-        <tr>
-          <td colSpan={colCount} className="wc-td">
-            <button
-              type="button"
-              className="wc-btn-icon inline-flex items-center justify-center"
-              disabled={!canAddActivity}
-              onClick={() => addActivity()}
-              aria-label={m.grid.addActivity}
-              title={
-                canAddActivity
-                  ? m.grid.addActivity
-                  : m.grid.addGoalNameFirst
-              }
-            >
-              <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
-            </button>
-          </td>
-        </tr>
+        {activities.length > 0 ? (
+          <tr>
+            <td colSpan={colCount} className="wc-td">
+              <button
+                type="button"
+                className="wc-btn-icon inline-flex items-center justify-center"
+                disabled={!canAddActivity}
+                onClick={() => addActivity()}
+                aria-label={m.grid.addActivity}
+                title={
+                  canAddActivity
+                    ? m.grid.addActivity
+                    : m.grid.addGoalNameFirst
+                }
+              >
+                <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
+              </button>
+            </td>
+          </tr>
+        ) : null}
       </tbody>
       <WeeklyGridFooter
         colTotals={colTotals}

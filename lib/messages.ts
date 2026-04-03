@@ -21,7 +21,10 @@ type Messages = {
     duration: string;
     total: string;
     totals: string;
+    /** Empty grid: short line before the add CTA */
     noActivities: string;
+    /** Empty grid: label on the primary add button */
+    addGoal: string;
     addActivity: string;
     addGoalNameFirst: string;
     activityName: string;
@@ -62,7 +65,8 @@ const EN_MESSAGES: Messages = {
     duration: "Duration",
     total: "Total",
     totals: "Totals",
-    noActivities: "No activities yet. Use the button below to add one.",
+    noActivities: "No activities yet.",
+    addGoal: "Add",
     addActivity: "Add activity",
     addGoalNameFirst: "Add a goal name to every row first",
     activityName: "Activity name",
@@ -116,7 +120,8 @@ const ES_MESSAGES: Messages = {
     duration: "Duración",
     total: "Total",
     totals: "Totales",
-    noActivities: "Aún no hay actividades. Usa el botón de abajo para agregar una.",
+    noActivities: "Aún no hay actividades.",
+    addGoal: "Agregar",
     addActivity: "Agregar actividad",
     addGoalNameFirst: "Primero agrega un nombre de meta a cada fila",
     activityName: "Nombre de actividad",
