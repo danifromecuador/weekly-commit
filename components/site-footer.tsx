@@ -12,8 +12,8 @@ export function SiteFooter() {
   const m = getMessages(locale);
 
   return (
-    <footer className="wc-site-footer mt-10 pt-6 sm:mt-12">
-      <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 sm:gap-y-2">
+    <footer className="wc-site-footer mt-8 pt-5 sm:mt-10 sm:pt-6">
+      <div className="flex flex-col items-center gap-2.5 text-center sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-2.5 sm:gap-y-1.5">
         <p className="wc-muted-ink m-0 inline-flex flex-wrap items-center justify-center gap-x-1.5">
           <span>{m.footer.by}</span>
           <a

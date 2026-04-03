@@ -58,7 +58,7 @@ export function ThemeSelector() {
         title={m.controls.theme}
         onClick={() => setOpen((v) => !v)}
       >
-        <Palette className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
+        <Palette className="size-4 shrink-0" strokeWidth={2} aria-hidden />
       </button>
       {open ? (
         <ul

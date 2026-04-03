@@ -18,12 +18,14 @@ export function LanguageToggle() {
   return (
     <button
       type="button"
-      className="wc-btn-icon inline-flex items-center justify-center px-2.5"
+      className="wc-btn-icon inline-flex items-center justify-center px-2 sm:px-2.5"
       aria-label={switchLabel}
       title={`${m.controls.languageLabel}: ${label}`}
       onClick={() => setLocale(nextLocale)}
     >
-      <span className="text-[0.65rem] font-semibold tracking-[0.12em]">{label}</span>
+      <span className="text-[0.6rem] font-semibold tracking-[0.1em] sm:text-[0.62rem] sm:tracking-[0.12em]">
+        {label}
+      </span>
     </button>
   );
 }

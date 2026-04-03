@@ -21,9 +21,9 @@ export function AppearanceToggle() {
       onClick={() => setAppearance(isDark ? "light" : "dark")}
     >
       {isDark ? (
-        <Sun className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
+        <Sun className="size-4 shrink-0" strokeWidth={2} aria-hidden />
       ) : (
-        <Moon className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
+        <Moon className="size-4 shrink-0" strokeWidth={2} aria-hidden />
       )}
     </button>
   );

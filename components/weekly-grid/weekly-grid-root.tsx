@@ -129,7 +129,7 @@ export function WeeklyGridRoot() {
                     : m.grid.addGoalNameFirst
                 }
               >
-                <Plus className="size-[1.125rem] shrink-0" strokeWidth={2} aria-hidden />
+                <Plus className="size-4 shrink-0" strokeWidth={2} aria-hidden />
               </button>
             </td>
           </tr>
