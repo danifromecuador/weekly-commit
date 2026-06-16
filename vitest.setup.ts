@@ -1,4 +1,8 @@
 import "@testing-library/jest-dom/vitest";
+import { vi } from "vitest";
+
+// Silence fire-and-forget fetch calls from the activities slice in unit tests
+vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(null, { status: 204 })));
 
 function createMemoryStorage(): Storage {
   const map = new Map<string, string>();

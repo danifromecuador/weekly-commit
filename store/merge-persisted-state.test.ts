@@ -22,6 +22,7 @@ function noopActions(): Pick<
   | "setActivityDuration"
   | "toggleDayCompletion"
   | "reorderActivities"
+  | "loadActivities"
 > {
   return {
     setTheme: () => {},
@@ -33,6 +34,7 @@ function noopActions(): Pick<
     setActivityDuration: () => {},
     toggleDayCompletion: () => {},
     reorderActivities: () => {},
+    loadActivities: () => {},
   };
 }
 
@@ -111,22 +113,19 @@ describe("mergeWeeklyCommitPersistedState", () => {
     expect(merged.appearance).toBe(DEFAULT_APPEARANCE);
   });
 
-  it("filters draft activities and keeps named rows", () => {
+  it("does not restore activities from persisted state (DB is source of truth)", () => {
     const current = baseCurrent();
     const merged = mergeWeeklyCommitPersistedState(
       {
-        activities: [
-          namedRow("OK"),
-          { ...namedRow(""), name: "   ", id: "draft" },
-        ],
+        activities: [namedRow("OK"), { ...namedRow(""), name: "   ", id: "draft" }],
       },
       current,
     );
-    expect(merged.activities).toHaveLength(1);
-    expect(merged.activities[0]!.name).toBe("OK");
+    // Activities are loaded from the server, not from localStorage
+    expect(merged.activities).toEqual(current.activities);
   });
 
-  it("leaves activities unchanged when persisted.activities is not an array", () => {
+  it("leaves activities unchanged regardless of persisted.activities", () => {
     const keep = [namedRow("Only")];
     const current = baseCurrent({ activities: keep });
     const merged = mergeWeeklyCommitPersistedState(

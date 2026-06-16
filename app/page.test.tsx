@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import Page from "./page";
+import { WeeklyCommitApp } from "@/components/weekly-commit-app";
 
 vi.mock("@/store", () => ({
-  useWeeklyGridStore: (selector: (state: { locale: "en" | "es" }) => unknown) =>
-    selector({ locale: "en" }),
+  useWeeklyGridStore: (selector: (state: { locale: "en" | "es"; loadActivities: () => void }) => unknown) =>
+    selector({ locale: "en", loadActivities: () => {} }),
 }));
 
 vi.mock("@/components/language-toggle", () => ({
@@ -26,7 +26,7 @@ vi.mock("@/components/WeeklyGrid", () => ({
 
 describe("Page header controls", () => {
   it("renders controls in language, appearance, theme order", () => {
-    render(<Page />);
+    render(<WeeklyCommitApp initialActivities={[]} />);
     const buttons = screen.getAllByRole("button");
     expect(buttons.map((b) => b.textContent)).toEqual([
       "Language",
@@ -35,4 +35,3 @@ describe("Page header controls", () => {
     ]);
   });
 });
-
