@@ -22,4 +22,6 @@ export type WeeklyCommitState = {
   toggleDayCompletion: (id: string, day: DayId) => void;
   /** Reorders rows by id only; does not change row fields. */
   reorderActivities: (activeId: string, overId: string) => void;
+  /** Loads activities from the server into the store (called once on mount). */
+  loadActivities: (rows: ActivityRow[]) => void;
 };

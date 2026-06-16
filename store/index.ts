@@ -8,10 +8,7 @@ import {
   applyThemeAndAppearanceToDocument,
 } from "@/lib/themes";
 
-import {
-  createActivitiesSlice,
-  persistedActivitiesOnly,
-} from "./slices/activities-slice";
+import { createActivitiesSlice } from "./slices/activities-slice";
 import { createLocaleSlice } from "./slices/locale-slice";
 import { createThemeSlice } from "./slices/theme-slice";
 import { mergeWeeklyCommitPersistedState } from "./merge-persisted-state";
@@ -33,7 +30,6 @@ export const useWeeklyGridStore = create<WeeklyCommitState>()(
         typeof window !== "undefined" ? window.localStorage : noopStorage,
       ),
       partialize: (s) => ({
-        activities: persistedActivitiesOnly(s.activities),
         themeId: s.themeId,
         appearance: s.appearance,
         locale: s.locale,
