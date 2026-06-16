@@ -19,21 +19,34 @@ Run a single test file:
 bunx vitest run components/weekly-grid/weekly-grid-root.test.tsx
 ```
 
+Database (Drizzle + Neon):
+```bash
+bunx drizzle-kit generate   # generate migration SQL from schema changes
+bunx drizzle-kit migrate    # apply pending migrations to Neon
+bunx drizzle-kit studio     # local DB browser at localhost:4983
+```
+
 ## Architecture
 
-**Single-page app.** `app/page.tsx` is the only route (`"use client"`). `app/layout.tsx` is a Server Component that injects two inline blocking scripts before React hydrates (see below).
+**App Router with auth.** `app/page.tsx` is a Server Component — it validates the session (via Better Auth), fetches activities from Neon, and passes them as props to `<WeeklyCommitApp>` (a `"use client"` component). `app/layout.tsx` injects two inline blocking scripts before React hydrates (see below).
+
+### Auth & database
+
+- **Better Auth** (`lib/auth.ts`) — Google OAuth only. The Next.js handler lives at `app/api/auth/[...all]/route.ts`.
+- **Drizzle + Neon** (`lib/db.ts`, `lib/db/schema.ts`) — schema has BA's required tables (`user`, `session`, `account`, `verification`) plus the app's `activities` table. Run `bunx drizzle-kit migrate` after schema changes.
+- **Route protection** — `proxy.ts` (Next.js 16 renamed `middleware.ts` → `proxy.ts`) redirects unauthenticated requests to `/login`. Always verify session inside API routes too — don't rely on proxy alone.
 
 ### Store (`store/`)
 
 One Zustand store (`useWeeklyGridStore`) composed of three slices via `persist` middleware:
 
-- `activities-slice` — `ActivityRow[]` CRUD + drag reorder via `@dnd-kit/sortable`'s `arrayMove`
+- `activities-slice` — `ActivityRow[]` CRUD + drag reorder via `@dnd-kit/sortable`'s `arrayMove`. Each mutating action updates local state immediately (optimistic) then fires a background `fetch` to the activities API.
 - `locale-slice` — `"en" | "es"` (i18n toggle)
 - `theme-slice` — `ThemeId` + `AppearanceMode`
 
-Persisted to `localStorage` under key `"weekly-commit"`. Only rows with a non-empty trimmed name are written to storage (`persistedActivitiesOnly`). Draft rows (name `""`) are in-memory only.
+Activities are **not** persisted to localStorage — they load from the server via `loadActivities()` called on mount in `WeeklyCommitApp`. Theme, appearance, and locale continue to live in localStorage under key `"weekly-commit"`.
 
-`store/merge-persisted-state.ts` handles safe rehydration — validates shapes before merging, never blindly spreads persisted state.
+`store/merge-persisted-state.ts` handles safe rehydration of theme/locale — never blindly spreads persisted state.
 
 ### Theming & flash prevention
 
