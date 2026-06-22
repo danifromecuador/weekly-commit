@@ -2,6 +2,7 @@
 
 import { getMessages } from "@/lib/messages";
 import { useWeeklyGridStore } from "@/store";
+import { authClient } from "@/lib/auth-client";
 
 const LINKEDIN_HREF = "https://www.linkedin.com/in/danifromec/";
 const STREAKS_HREF = "https://streaks-xekk.onrender.com/";
@@ -57,6 +58,14 @@ export function SiteFooter() {
           >
             {m.footer.plannywise}
           </a>
+          <button
+            type="button"
+            className="wc-footer-link wc-muted-ink  cursor-pointer"
+            onClick={() => authClient.signOut({ fetchOptions: { onSuccess: () => window.location.href = "/login" } })}
+          >
+            {m.footer.signOut}
+          </button>
+
         </nav>
       </div>
     </footer>

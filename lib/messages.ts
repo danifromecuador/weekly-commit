@@ -50,6 +50,7 @@ type Messages = {
     streaksAria: string;
     plannywiseAria: string;
     relatedAppsNavAria: string;
+    signOut: string;
   };
 };
 
@@ -113,6 +114,7 @@ const EN_MESSAGES: Messages = {
     streaksAria: "Streaks — open productivity app",
     plannywiseAria: "Plannywise — open productivity app",
     relatedAppsNavAria: "More productivity apps by Dani Dev",
+    signOut: "Sign out",
   },
 };
 
@@ -143,7 +145,8 @@ const ES_MESSAGES: Messages = {
     removeActivity: "Eliminar actividad",
     removeThisGoalQuestion: "¿Eliminar esta meta?",
     removeNamedGoalSuffix: "será eliminada. Esta acción no se puede deshacer.",
-    removeUnnamedRow: "Esta fila será eliminada. Esta acción no se puede deshacer.",
+    removeUnnamedRow:
+      "Esta fila será eliminada. Esta acción no se puede deshacer.",
     cancel: "Cancelar",
     remove: "Eliminar",
     setGoalNameAndDurationFirst: "Primero define nombre de meta y duración",
@@ -176,10 +179,10 @@ const ES_MESSAGES: Messages = {
     streaksAria: "Streaks — abrir app de productividad",
     plannywiseAria: "Plannywise — abrir app de productividad",
     relatedAppsNavAria: "Más apps de productividad de Dani Dev",
+    signOut: "Cerrar sesión",
   },
 };
 
 export function getMessages(locale: Locale): Messages {
   return locale === "es" ? ES_MESSAGES : EN_MESSAGES;
 }
-
