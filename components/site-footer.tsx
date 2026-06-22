@@ -61,7 +61,7 @@ export function SiteFooter() {
           <button
             type="button"
             className="wc-footer-link wc-muted-ink  cursor-pointer"
-            onClick={() => authClient.signOut({ fetchOptions: { onSuccess: () => window.location.href = "/login" } })}
+            onClick={() => authClient.signOut({ fetchOptions: { onSuccess: () => { window.location.href = "/login"; } } })}
           >
             {m.footer.signOut}
           </button>
