@@ -24,6 +24,12 @@ vi.mock("@/components/WeeklyGrid", () => ({
   WeeklyGrid: () => <div>Grid</div>,
 }));
 
+vi.mock("@/lib/auth-client", () => ({
+  authClient: {
+    signOut: vi.fn(),
+  },
+}));
+
 describe("Page header controls", () => {
   it("renders controls in language, appearance, theme order", () => {
     render(<WeeklyCommitApp initialActivities={[]} />);
@@ -32,6 +38,9 @@ describe("Page header controls", () => {
       "Language",
       "Appearance",
       "Theme",
+      "Sign out",
     ]);
   });
 });
+
+
