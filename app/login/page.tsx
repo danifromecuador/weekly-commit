@@ -9,7 +9,7 @@ export default function LoginPage() {
         <h1 className="wc-title-script text-3xl">Weekly Commit</h1>
         <button
           onClick={() => signIn.social({ provider: "google", callbackURL: "/" })}
-          className="flex items-center gap-3 rounded-lg border px-5 py-3 text-sm font-medium transition-colors hover:bg-gray-50"
+          className="flex items-center gap-3 rounded-lg border px-5 py-3 text-sm font-medium transition-colors hover:bg-black/25 cursor-pointer"
         >
           <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
             <path
